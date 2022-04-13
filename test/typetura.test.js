@@ -13,11 +13,11 @@ describe('Example Tests', () => {
 
 		// First get the component's output, this returns an object containing the generated html (`.html`)
 		before(async () => {
-			component = await getComponentOutput('./src/Component.astro');
+			component = await getComponentOutput('./packages/typetura/Typetura.astro');
 		});
 		// Unless you modified /src/Component.astro, this should pass, as the component is empty apart from the frontmatter
 		it('just saying hey', () => {
-			expect(component.html).to.contain('<h1>hey</h1>');
+			expect(component.html).to.contain('');
 		});
 	});
 });

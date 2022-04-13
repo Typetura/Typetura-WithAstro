@@ -1,5 +1,35 @@
 ---
-import typetura from './typetura.min.js?url';
----
+import * as typetura from 'typeturajs';
 
-<script src={typetura}></script>
+interface Props {
+	cdn?:boolean
+	base?:number
+	scale?:number
+	js?:boolean
+}
+
+const {cdn, base = 20, scale = 1, js} = Astro.props as Props
+
+---
+	<!-- Typetura -->
+{
+	cdn 
+		? <script src={'https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js'}></script>
+		: <script src={typetura}></script>
+}
+{
+	js ?
+		<script is:inline define:vars={{base,scale}}>
+			window.typetura = {
+				base: base, 
+				scale: scale
+			};
+		</script>
+	:
+		<style is:global define:vars={{base,scale}}>
+			:root {
+				--tt-base: var(--base);
+				--tt-scale: var(--scale);
+			}
+		</style>
+}

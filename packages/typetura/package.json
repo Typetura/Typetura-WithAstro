@@ -9,11 +9,13 @@
   "type": "module",
   "exports": {
     ".": "./index.ts",
-    "./Typetura": "./Typetura.astro"
+    "./Typetura": "./Typetura.astro",
+    "./TypeturaPackages": "./TypeturaP.astro"
   },
   "files": [
     "index.ts",
-    "Typetura.astro"
+    "Typetura.astro",
+    "TypeturaP.astro"
   ],
   "keywords": [
     "typeturajs",

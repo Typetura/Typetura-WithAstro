@@ -1,7 +1,7 @@
 {
   "name": "astro-typetura",
   "version": "0.1.0",
-  "private":"true",
+  "private": "true",
   "type": "module",
   "exports": {
     ".": "./index.ts"
@@ -36,7 +36,7 @@
   "peerDependencies": {
     "astro": "latest"
   },
-  "workspaces":[
+  "workspaces": [
     "packages/*",
     "test/*",
     "www/*"

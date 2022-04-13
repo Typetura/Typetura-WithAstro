@@ -12,18 +12,30 @@ Hopefully, all of this together will provide you with a fun and comfortable deve
 
 **⚠️ Don't forget:** You should edit `package.json` with the info relevant to your project, such as a proper `name`, a license, a link to the repository for the npm website and other settings. You should also adjust the Astro `peerDependency` to the lowest version of Astro you support
 
-## Folder Structure
+## Project Overview
 
-```plaintext
-├── .vscode/                    # VS Code settings folder
-│   ├── settings.json           # Workspace settings
-│   └── extensions.json         # Very strongly recommended extensions to install
-├── src/                        # Your component source code
-│   ├── Component.astro         # Example component file
-│   └── main.ts                 # Example source code file
-├── test/                       # Your component tests
-│   └── example.test.js         # Example tests
-└── index.ts                    # Should contain all the exports your component provide to users
+```tree
+packages
+└── typetura
+    ├── main.ts
+    ├── package.json
+    ├── Typetura.astro
+    └── TypeturaP.astro
+test
+├── README.md
+└── typetura.test.js
+www
+├── astro.config.mjs
+├── package.json
+├── public
+│   └── favicon.ico
+├── README.md
+├── sandbox.config.json
+├── src
+│   └── pages
+│       └── index.astro
+├── tsconfig.json
+└── yarn.lock
 ```
 
 ESLint, Prettier and EditorConfig settings are respectively located in the following files: `.eslintrc.js`, `.prettierrc.js` and `.editorconfig` at the root of this template project.
@@ -32,22 +44,11 @@ ESLint, Prettier and EditorConfig settings are respectively located in the follo
 
 The following npm scripts are provided to lint and format your project
 
-| Command          | Action                                                        |
-| :--------------- | :------------------------------------------------------------ |
-| `npm run test`   | Run tests using Mocha                                         |
-| `npm run format` | Format your project using Prettier, this edits files in-place |
-| `npm run lint`   | Lint your project using ESLint                                |
+| Command           | Action                                                        |
+| :---------------  | :------------------------------------------------------------ |
+| `npm run test`    | Run tests using Mocha                                         |
+| `npm run format`  | Format your project using Prettier, this edits files in-place |
+| `npm run lint`    | Lint your project using ESLint                                |
+| `npm run dev`     | Launches the Dev Server                                       |
+| `npm run publish` | Publish Component to NPM                                      |
 
-In VS Code, you can access those commands in the Explorer in the `NPM Scripts` section
-
-## Frequently asked questions
-
-### Is this official?
-
-No, Astro does not have an official template for component and other options than this one exists. You should choose the one that fits your needs the best!
-
-### Which package manage should I use?
-
-The one you prefer! This template makes no assumption.
-
-The only package manager related thing in this repo is that the prettier plugins has the proper configuration needed to work with pnpm (but it works with the other too, pnpm just need additional settings)

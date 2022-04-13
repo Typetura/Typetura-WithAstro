@@ -13,7 +13,10 @@
   "scripts": {
     "test": "mocha --parallel --timeout 15000",
     "format": "prettier -w .",
-    "lint": "eslint . --ext .ts,.js"
+    "lint": "eslint . --ext .ts,.js",
+    "dev" : "cd www && astro dev",
+    "build" : "cd www && astro build",
+    "publish" : "cd packages/typetura && npm publish"
   },
   "devDependencies": {
     "@types/chai": "^4.3.0",

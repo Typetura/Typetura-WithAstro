@@ -24,10 +24,10 @@ type Packages =
 	| 'Stockholm';
 
 interface Props {
-	package: Packages;
+	pkg: Packages;
 }
 
-const { package } = Astro.props as Props;
+const { pkg } = Astro.props as Props;
 /**
  * PUBLIC_TYPETURA_KEY  = Public API key
  * Obtained from process.env from build host

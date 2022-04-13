@@ -2,10 +2,8 @@
   "name": "astro-typetura",
   "version": "0.0.1",
   "description": "An Astro Component, utilizing Typetura's futurisitc typography and font system.",
-  "main": "index.js",
   "author": "aFuzzyBear",
   "license": "MIT",
-  "private": true,
   "type": "module",
   "exports": {
     ".": "./index.ts",
@@ -25,9 +23,6 @@
     "typography"
   ],
   "peerDependencies": {
-    "astro": "^1.0.0-beta.9"
-  },
-  "dependencies": {
     "typeturajs": "^2.0.0"
   }
 }

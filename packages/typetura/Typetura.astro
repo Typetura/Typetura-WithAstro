@@ -12,13 +12,14 @@ const {cdn, base = 20, scale = 1, js} = Astro.props as Props
 
 ---
 <!-- Typetura Typography -->
+
+
+	<script src='https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js'></script>
+
+
 {
-	cdn 
-		? <script src={'https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js'}></script>
-		: <script src={typetura}></script>
-}
-{
-	js ?
+	Boolean(js) 
+	?
 		<script is:inline define:vars={{base,scale}}>
 			window.typetura = {
 				base: base, 

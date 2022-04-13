@@ -15,10 +15,9 @@ describe('Example Tests', () => {
 		before(async () => {
 			component = await getComponentOutput('./src/Component.astro');
 		});
-
 		// Unless you modified /src/Component.astro, this should pass, as the component is empty apart from the frontmatter
-		it('example component should be empty', () => {
-			expect(component.html).to.equal('<head></head><body></body>');
+		it('just saying hey', () => {
+			expect(component.html).to.contain('<h1>hey</h1>');
 		});
 	});
 });

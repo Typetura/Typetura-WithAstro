@@ -6,7 +6,26 @@
   "author": "aFuzzyBear",
   "license": "MIT",
   "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./Typetura": "./Typetura.astro"
+  },
+  "files": [
+    "index.ts",
+    "Typetura.astro"
+  ],
+  "keywords": [
+    "typeturajs",
+    "with-astro",
+    "astro-component",
+    "font",
+    "typography"
+  ],
   "peerDependencies": {
-    "astro": "^1.0.0-beta.8"
+    "astro": "^1.0.0-beta.9"
+  },
+  "dependencies": {
+    "typeturajs": "^2.0.0"
   }
 }

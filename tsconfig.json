@@ -5,5 +5,5 @@
     "allowJs": true,
     "noEmit": true
   },
-  "include": ["index.ts", "packages"]
+  "include": ["index.ts", "packages", "packages/typetura/typetura.min.js"]
 }

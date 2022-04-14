@@ -23,11 +23,11 @@ type Packages =
 	| 'Santa Fe'
 	| 'Stockholm';
 
-interface Props {
+interface PackageProps {
 	pkg: Packages;
 }
 
-const { pkg } = Astro.props as Props;
+const { pkg } = Astro.props as PackageProps;
 /**
  * PUBLIC_TYPETURA_KEY  = Public API key
  * Obtained from process.env from build host
@@ -43,13 +43,12 @@ if (!API_KEY) {
 	To signup for an official Typetura Font system visit:
 	https://typetura.com/packages
 	If you have any issues with your API key please contact:
-	mailto:support@typetura.com
+	support@typetura.com
 	`);
 }
 ---
 
 <!-- Typetura Typography -->
-<link href={`https://cdn.typetura.com/typetura.js?apiKey=${API_KEY}`} rel="preload" as="script" />
 <script src={`https://cdn.typetura.com/typetura.js?apiKey=${API_KEY}`}></script>
-<link rel="preload" as="style" type="text/css" href={`https://cdn.typetura.com/${package}/typetura.css?apiKey=${API_KEY}`} />
+<link rel="preload" as="style" type="text/css" href={`https://cdn.typetura.com/${pkg}/typetura.css?apiKey=${API_KEY}`} />
 <!-- END: Typetura Typography -->

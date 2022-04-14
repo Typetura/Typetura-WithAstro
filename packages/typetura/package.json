@@ -7,13 +7,13 @@
   "type": "module",
   "types": "./types.d.ts",
   "exports": {
-    ".": "./index.ts",
+    ".": "./index.js",
     "./Typetura": "./Typetura.astro",
     "./Packages": "./Packages.astro",
     "./types": "./types.ts"
   },
   "files": [
-    "index.ts",
+    "index.js",
     "Typetura.astro",
     "Packages.astro",
     "types"

@@ -12,5 +12,7 @@
   "devDependencies": {
     "astro": "^1.0.0-beta.10"
   },
-  "dependencies": {}
+  "dependencies": {
+    "astro-typetura": "file:../packages/typetura"
+  }
 }

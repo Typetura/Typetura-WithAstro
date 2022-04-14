@@ -7,10 +7,10 @@ interface Props {
 	scale?: number;
 	js?: boolean;
 	selectors?: string | string[];
-	pkg?:string
+	pack?:string
 }
 
-let { base = 20, scale = 1, js, selectors, pkg } = Astro.props as Props;
+let { base = 20, scale = 1, js, selectors, pack } = Astro.props as Props;
 
 let overrides: string[];
 if (selectors && !js) {
@@ -29,7 +29,8 @@ if (selectors) {
 }
 const renderStatement = () => {
 	if (js && selectors) {
-		return `<script>window.typetura={ base:${base}scale:${scale},selectors:${overrides}
+		return `<script>
+		window.typetura={ base:${base},scale:${scale},selectors:${overrides}
 		}</script>`;
 	}
 	if (js) {
@@ -43,11 +44,14 @@ const renderStatement = () => {
 	}
 	</style>`;
 };
+console.log(pack)
 ---
-{
-	pack 
-	 ? <Packages {pkg} />
-	 :<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"></script>
+{ Boolean(pack)
+  ?
+	<Packages pkg={pack}/>
+	:
+	<>
+	<Fragment set:html={renderStatement()} />
+	<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"></script>
+	</>
 }
-
-<Fragment set:html={renderStatement()} />

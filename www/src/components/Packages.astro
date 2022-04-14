@@ -1,0 +1,55 @@
+---
+type Packages =
+	| 'Armonk'
+	| 'Austin'
+	| 'Boston'
+	| 'Brussels'
+	| 'Cape Canaveral'
+	| 'Chapel Hill'
+	| 'Chicago'
+	| 'District of Columbia'
+	| 'Fargo'
+	| 'Flagstaff'
+	| 'Kampala'
+	| 'Los Angeles'
+	| 'Madrid'
+	| 'Memphis'
+	| 'New Haven'
+	| 'New York'
+	| 'Oxford'
+	| 'Palo Alto'
+	| 'Prague'
+	| 'Saint Denis'
+	| 'Santa Fe'
+	| 'Stockholm';
+
+interface PackageProps {
+	pkg: Packages;
+}
+
+const { pkg } = Astro.props as PackageProps;
+/**
+ * PUBLIC_TYPETURA_KEY  = Public API key
+ * Obtained from process.env from build host
+ * Else use `.env` to obtain Key
+ */
+const API_KEY = process.env.PUBLIC_TYPETURA_KEY || import.meta.env.PUBLIC_TYPETURA_KEY;
+if (!API_KEY) {
+	throw Error(`
+	⚠ Error from '<TypeturaPro/>'
+	Sorry there is no Typetura API key found within the project's '.env',
+	If you are in possesion of an API key please set it to:
+	'PUBLIC_TYPETURA_KEY=XXXXXXX-XXXXXXX-XXXXXXX-XXXXXXX'
+	To signup for an official Typetura Font system visit:
+	https://typetura.com/packages
+	If you have any issues with your API key please contact:
+	support@typetura.com
+	`);
+}
+const render = () => `<script src="https://cdn.typetura.com/typetura.js?apiKey=${API_KEY}"></script>
+<link rel="preload" as="style" type="text/css" href="https://cdn.typetura.com/${pkg}/typetura.css?apiKey=${API_KEY}" />`;
+---
+
+<!-- Typetura Typography -->
+<Fragment set:html={render()} />
+<!-- END: Typetura Typography -->

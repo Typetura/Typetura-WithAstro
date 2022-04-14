@@ -29,14 +29,19 @@ if (selectors) {
 }
 const renderStatement = () => {
 	if (js && selectors) {
-		return `<script>
+		return `
+			<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"></script>
+		<script>
 		window.typetura={ base:${base},scale:${scale},selectors:${overrides}
 		}</script>`;
 	}
 	if (js) {
-		return `<script>window.typetura={base:${base},scale:${scale}}</script>`;
+		return `
+			<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"></script>
+		<script>window.typetura={base:${base},scale:${scale}}</script>`;
 	}
 	return `
+		<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"></script>
 	<style>
 	:root{
 		--tt-base:${base};
@@ -50,8 +55,5 @@ console.log(pack)
   ?
 	<Packages pkg={pack}/>
 	:
-	<>
 	<Fragment set:html={renderStatement()} />
-	<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"></script>
-	</>
 }

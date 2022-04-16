@@ -1,7 +1,8 @@
 ---
 import { Typetura } from 'astro-typetura';
-
+import type { Packages, TypeturaProps } from 'astro-typetura';
 console.log(Typetura);
+const pkgs: Packages = 'Brussels'.toLowerCase();
 ---
 
 <html lang="en">
@@ -9,7 +10,7 @@ console.log(Typetura);
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>Astro</title>
-		<Typetura pack="brooklyn" base={15} scale={0.5} />
+		<Typetura js base={40} scale={0.5} />
 	</head>
 	<body>
 		<header>
@@ -17,7 +18,7 @@ console.log(Typetura);
 			<h2>Astro Component</h2>
 		</header>
 		<main>
-		<!-- <Heading sub>
+			<!-- <Heading sub>
 		</Heading>
 			<Text small>
 			

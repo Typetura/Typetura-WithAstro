@@ -42,22 +42,51 @@ describe('Test: <Typetura/> Component', () => {
 		})
 		describe('Multiple Prop Values',()=>{
 			before(async()=>{
-				component = await getComponentOutput('./packages/typetura/Typetura.astro',{js:true,selectors:'.test'})
+				component = await getComponentOutput('./packages/typetura/Typetura.astro',{js:true,selectors:'.test,test'})
 				console.log(component.html)
 			})
 			it(`Render selectors output `,()=>{
-				expect(component.html).to.include(`selectors:[.test]`)
+				expect(component.html).to.include(`selectors:[.test,test]`)
 			})
 		})
 		
 	})
 	describe('Test Prop: <Typetura base/>',()=>{
-		before(async()=>{
-			component = await getComponentOutput('./packages/typetura/Typetura.astro',{base:10})
-			console.log(component.html)
+		describe('Check Default Prop  Value in CSS',()=>{
+			before(async()=>{
+				component = await getComponentOutput('./packages/typetura/Typetura.astro')
+				console.log(component.html)
+			})
+			it(`Must return :root && --tt-base:20`,()=>{
+				expect(component.html).to.include(':root').and.to.include(`--tt-base:20`)
+			})
 		})
-		it(`Changes the Base value`,()=>{
-			expect(component.html).to.include(`base:10`)
+		describe('Check Default Prop Value in JS ',()=>{
+			before(async()=>{
+				component = await getComponentOutput('./packages/typetura/Typetura.astro',{js:true})
+				console.log(component.html)
+			})
+			it(`Must return window && base:20 `,()=>{
+				expect(component.html).to.include(`window.typetura`).and.to.include('base:20')
+			})
+		})
+		describe('Alternative Base Value in CSS',()=>{
+			before(async()=>{
+				component = await getComponentOutput('./packages/typetura/Typetura.astro',{base:10})
+				console.log(component.html)
+			})
+			it(`Reflects a alternate Base Value of 10 `,()=>{
+				expect(component.html).to.include(':root').and.to.include(`base:10`)
+			})
+		})
+		describe('Alternative Base Value in JS',()=>{
+			before(async()=>{
+				component = await getComponentOutput('./packages/typetura/Typetura.astro',{js:true,base:10})
+				console.log(component.html)
+			})
+			it(`Reflects a alternate Base Value of 10 `,()=>{
+				expect(component.html).to.include('window.typetura').and.to.include(`base:10`)
+			})
 		})
 	})
 });

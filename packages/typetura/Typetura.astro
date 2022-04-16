@@ -1,12 +1,12 @@
 ---
 import Packages from './Packages.astro'
-
+import type {PackageProps} from './types'
 interface Props {
 	base?: number;
 	scale?: number;
 	js?: boolean;
 	selectors?: string | string[];
-	pack?:string
+	pack?: PackageProps 
 }
 
 let { base = 20, scale = 1, js, selectors, pack } = Astro.props as Props;
@@ -17,22 +17,18 @@ if (selectors && !js) {
 }
 if (selectors) {
 	if (typeof selectors === 'string') {
-		if (selectors.includes(',')) {
-			overrides = [...selectors.split(',')];
-		}
-		overrides = selectors.includes(',') ? [...selectors.split(',')] : [selectors];
+		overrides = selectors.includes(',') ? selectors.split(',') : [selectors];
 	}
 	if (Array.isArray(selectors)) {
-		overrides = [...selectors];
+		overrides = selectors;
 	}
 }
 const renderStatement = () => {
-	if (js && selectors) {
+	if (js && overrides) {
 		return `
 			<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"></script>
 		<script>
-		window.typetura={ base:${base},scale:${scale},selectors:${overrides}
-		}</script>`;
+		window.typetura={ base:${base},scale:${scale},selectors:[${overrides}]}</script>`;
 	}
 	if (js) {
 		return `
@@ -48,7 +44,6 @@ const renderStatement = () => {
 	}
 	</style>`;
 };
-console.log(pack)
 ---
 { Boolean(pack)
   ?

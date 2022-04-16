@@ -14,9 +14,9 @@
     "test": "mocha --parallel --timeout 15000",
     "format": "prettier -w .",
     "lint": "eslint . --ext .ts,.js",
-    "dev" : "cd www && astro dev",
-    "build" : "cd www && astro build",
-    "publish" : "cd packages/typetura && npm publish"
+    "dev": "cd www && astro dev",
+    "build": "cd www && astro build",
+    "publish": "cd packages/typetura && npm publish"
   },
   "devDependencies": {
     "@types/chai": "^4.3.0",
@@ -34,6 +34,7 @@
     "mocha": "^9.2.1",
     "prettier": "^2.5.1",
     "prettier-plugin-astro": "^0.0.12",
+    "turbo": "^1.2.4",
     "typescript": "^4.5.5"
   },
   "peerDependencies": {

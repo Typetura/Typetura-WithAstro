@@ -1,0 +1,41 @@
+---
+const handleError = (msg: string) => new Error(msg);
+
+let { level, sub, section, label, scale, base, ease, ...attrs } = Astro.props;
+
+let Heading: string = 'h1';
+
+if (typeof level === 'string') {
+	level = +level;
+}
+if (level >= 1 && level <= 4) {
+	Heading = `h${level}`;
+} else {
+	handleError(`Level: ${level} is out of Range, h1-> h4`);
+}
+
+let classes = Object.keys(attrs).find((item) => /^class$/i.test(item));
+let additionalClassList = [];
+if (classes) {
+	let classList = attrs['class'];
+	delete attrs['class'];
+	classList = typeof classList === 'string' ? classList.split(' ') : handleError('Incorrect values passed');
+	additionalClassList = classList;
+}
+---
+
+<Heading
+	class:list={[
+		{
+			'primary-headline': !Boolean(sub) && !Boolean(section) ? true : false,
+			'primary-subheadline': Boolean(sub) && !Boolean(section) ? true : false,
+			'section-headline': Boolean(section) && !Boolean(sub) ? true : false,
+			'section-subheadline': Boolean(sub) && Boolean(section) ? true : false,
+			'section-label': (Boolean(section) && Boolean(label)) || Boolean(label) ? true : false,
+		},
+		additionalClassList,
+	]}
+	{...attrs}
+>
+	<slot />
+</Heading>

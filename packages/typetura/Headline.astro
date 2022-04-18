@@ -1,7 +1,27 @@
 ---
 const handleError = (msg: string) => new Error(msg);
 
-let { level, sub, section, label, scale, base, ease, ...attrs } = Astro.props;
+interface HeadlineProps {
+	/** Apply as SubHeadline  */
+	sub?: Boolean;
+	/** Apply as a Section */
+	section?: Boolean;
+	/** Apply as a Label */
+	label?: Boolean;
+	/** Disable Typetura */
+	none?: Boolean;
+
+	/** Set the Level of Heading */
+	level?: string | number;
+	/** Adjust the Scale for this Headline */
+	scale?: number;
+	/** Adjust the Base Size for this Headline */
+	base?: number;
+	/** Adjust the Font Timing for this Headline */
+	ease?: CSSStyleDeclaration['animationTimingFunction'];
+}
+
+let { level, sub, section, label, scale, base, ease, none, ...attrs } = Astro.props as HeadlineProps;
 
 let Heading: string = 'h1';
 
@@ -22,6 +42,8 @@ if (classes) {
 	classList = typeof classList === 'string' ? classList.split(' ') : handleError('Incorrect values passed');
 	additionalClassList = classList;
 }
+
+let reqStyling = none || base || ease || scale;
 ---
 
 <Heading

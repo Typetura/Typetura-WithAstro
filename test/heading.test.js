@@ -71,7 +71,7 @@ describe('Test: <Headline />', () => {
 				expect(component.html).to.include('class').and.to.include('primary-headline');
 			});
 		});
-		describe('Sub Headline - props.sub', () => {
+		describe('Primary SubHeadline - props.sub', () => {
 			before(async () => {
 				component = await getComponent({ sub: true });
 			});
@@ -89,31 +89,82 @@ describe('Test: <Headline />', () => {
 				expect(component.html).to.include('class').and.to.include('section-headline');
 			});
 		});
-		describe('SubSection Headline - props.section', () => {
+		describe('SubSection Headline - props.section && props.sub', () => {
 			before(async () => {
 				component = await getComponent({ section: true, sub: true });
 			});
-			it('Render class="primary-subheadline', () => {
+			it('Render class="primary-subheadline"', () => {
 				expect(component.html).to.include('class').and.to.include('section-subheadline');
 			});
 		});
 	});
-	describe('Check passing of class attributes', () => {
-		describe('Section Headline - props.section', () => {
+	describe('Check Props.label', () => {
+		describe('Section Label - props.label', () => {
 			before(async () => {
-				component = await getComponent({ class: 'test red flex' });
-				console.log(component.html);
+				component = await getComponent({ label: true });
 			});
-			it('Render class="primary-headline"', () => {
-				expect(component.html).to.include('class').and.to.include('primary-headline').and.include('test').and.include('red').and.include('flex');
+			it('Render class="section-label"', () => {
+				expect(component.html).to.include('class').and.to.include('section-label');
 			});
 		});
-		// describe('SubSection Headline - props.section', () => {
+		describe('Section Label - props.section && props.label', () => {
+			before(async () => {
+				component = await getComponent({ section: true, label: true });
+			});
+			it('Render class="section-label"', () => {
+				expect(component.html).to.include('class').and.to.include('section-label');
+			});
+		});
+	});
+	describe('Check passing of class attributes', () => {
+		describe('Primary Headline + additional class ', () => {
+			before(async () => {
+				component = await getComponent({ class: 'test' });
+			});
+			it('Render class="primary-headline test"', () => {
+				expect(component.html).to.include('class').and.to.include('primary-headline test');
+			});
+		});
+		describe('Primary Headline + additional classes ', () => {
+			before(async () => {
+				component = await getComponent({ class: 'test red flex' });
+			});
+			it('Render class="primary-headline test red flex"', () => {
+				expect(component.html).to.include('class').and.to.include('primary-headline test red flex');
+			});
+		});
+	});
+	describe('Check passing of additional html attributes', () => {
+		describe('Passing through an id="test" ', () => {
+			before(async () => {
+				component = await getComponent({ id: 'test' });
+			});
+			it('Render id="test"', () => {
+				expect(component.html).to.include('id="test"');
+			});
+		});
+		describe('Passing through data-value attributes ', () => {
+			before(async () => {
+				component = await getComponent({ 'data-value': 42 });
+			});
+			it('Render data-value="42"', () => {
+				expect(component.html).to.include('data-value="42"');
+			});
+		});
+		describe('Passing through aria attributes ', () => {
+			before(async () => {
+				component = await getComponent({ 'aria-labelledby': 'Joe' });
+			});
+			it('Render aria-labelledby="Joe"', () => {
+				expect(component.html).to.include('aria-labelledby="Joe"');
+			});
+		});
+		// describe('', () => {
 		// 	before(async () => {
-		// 		component = await getComponent({ section: true, sub: true });
+		// 		component = await getComponent();
 		// 	});
-		// 	it('Render class="primary-subheadline', () => {
-		// 		expect(component.html).to.include('class').and.to.include('section-subheadline');
+		// 	it('', () => {
+		// 		expect(component);
 		// 	});
 		// });
 	});

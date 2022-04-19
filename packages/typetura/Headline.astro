@@ -43,17 +43,42 @@ if (classes) {
 	additionalClassList = classList;
 }
 
-let reqStyling = none || base || ease || scale;
----
+let pHead:Boolean,
+	pSub:Boolean,
+	sHead:Boolean,
+	sSub:Boolean,
+	sLabel:Boolean;
+	pHead=pSub=sHead=sSub=sLabel=false
 
+if (!Boolean(sub) && !Boolean(section) && !Boolean(label)) pHead = true;
+if (Boolean(sub) && !Boolean(section) && !Boolean(label)) pSub = true;
+if (Boolean(section) && !Boolean(sub) && !Boolean(label)) sHead = true;
+if (Boolean(sub) && Boolean(section) && !Boolean(label)) sSub = true;
+if ((Boolean(section) && Boolean(label)) || Boolean(label)) sLabel = true;
+
+const manageStyling = () => {
+	return `<style>${
+		Boolean(pHead)? `.primary-headline` :
+		Boolean(pSub) ? `.primary-subheadline` :
+		Boolean(sHead)? `.section-headline` :
+		Boolean(sSub) ? `.section-subheadline`:
+		Boolean(sLabel) ? `.section-label`: ``
+	}{${Boolean(none) ? `--tt-key:none;`:''}${Boolean(base) ? `--tt-base:${base};`  :''}${Boolean(ease) ? `--tt-ease:${ease};`  : ''}${Boolean(scale)? `--tt-scale:${scale};`:''}}</style>`;
+};
+
+---
+{
+	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) ) &&
+	<Fragment set:html={manageStyling()}/> 
+}
 <Heading
 	class:list={[
 		{
-			'primary-headline': !Boolean(sub) && !Boolean(section) ? true : false,
-			'primary-subheadline': Boolean(sub) && !Boolean(section) ? true : false,
-			'section-headline': Boolean(section) && !Boolean(sub) ? true : false,
-			'section-subheadline': Boolean(sub) && Boolean(section) ? true : false,
-			'section-label': (Boolean(section) && Boolean(label)) || Boolean(label) ? true : false,
+			'primary-headline': Boolean(pHead) && true,
+			'primary-subheadline': Boolean(pSub) && true,
+			'section-headline': Boolean(sHead) && true,
+			'section-subheadline': Boolean(sSub) && true,
+			'section-label': Boolean(sLabel) && true,
 		},
 		additionalClassList,
 	]}
@@ -61,3 +86,4 @@ let reqStyling = none || base || ease || scale;
 >
 	<slot />
 </Heading>
+

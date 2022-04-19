@@ -116,6 +116,7 @@ describe('Test: <Headline />', () => {
 			});
 		});
 	});
+
 	describe('Check passing of class attributes', () => {
 		describe('Primary Headline + additional class ', () => {
 			before(async () => {
@@ -159,13 +160,138 @@ describe('Test: <Headline />', () => {
 				expect(component.html).to.include('aria-labelledby="Joe"');
 			});
 		});
-		// describe('', () => {
-		// 	before(async () => {
-		// 		component = await getComponent();
-		// 	});
-		// 	it('', () => {
-		// 		expect(component);
-		// 	});
-		// });
+		describe('Check Props.base', () => {
+			describe('Passing through values - props.base', () => {
+				before(async () => {
+					component = await getComponent({ base: 10 });
+				});
+				it('Render <style>.primary-headline{--tt-base:10}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.primary-headline{--tt-base:10;}');
+				});
+			});
+		});
+		describe('Check Props.scale', () => {
+			describe('Passing through values - props.scale', () => {
+				before(async () => {
+					component = await getComponent({ scale: 0.5 });
+				});
+				it('Render <style>.primary-headline{--tt-scale:0.5}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.primary-headline{--tt-scale:0.5;}');
+				});
+			});
+		});
+		describe('Check Props.ease', () => {
+			describe('Passing through values - props.ease', () => {
+				before(async () => {
+					component = await getComponent({ ease: 'ease-in' });
+				});
+				it('Render <style>.primary-headline{--tt-ease:ease-in;}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.primary-headline{--tt-ease:ease-in;}');
+				});
+			});
+		});
+		describe('Check Props.none', () => {
+			describe('Primary Headline - props.none', () => {
+				before(async () => {
+					component = await getComponent({ none: true });
+				});
+				it('Render <style>.primary-headline{--tt-key:none;}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.primary-headline{--tt-key:none;}');
+				});
+			});
+			describe('Primary SubHeadline - props.none', () => {
+				before(async () => {
+					component = await getComponent({ none: true, sub: true });
+				});
+				it('Render <style>.primary-subheadline{--tt-key:none;}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.primary-subheadline{--tt-key:none;}');
+				});
+			});
+			describe('Section Headline - props.none', () => {
+				before(async () => {
+					component = await getComponent({ none: true, section: true });
+				});
+				it('Render <style>.section-headline{--tt-key:none;}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.section-headline{--tt-key:none;}');
+				});
+			});
+			describe('Section subHeadline - props.none', () => {
+				before(async () => {
+					component = await getComponent({ none: true, section: true, sub: true });
+				});
+				it('Render <style>.section-subheadline{--tt-key:none;}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.section-subheadline{--tt-key:none;}');
+				});
+			});
+			describe('Section label - props.none', () => {
+				before(async () => {
+					component = await getComponent({ none: true, section: true, label: true });
+				});
+				it('Render <style>.section-label{--tt-key:none;}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.section-label{--tt-key:none;}');
+				});
+			});
+		});
+		describe('Check Props.base', () => {
+			describe('Primary Headline - props.base', () => {
+				before(async () => {
+					component = await getComponent({ base: 42 });
+				});
+				it('Render <style>.primary-headline{--tt-base:42;}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.primary-headline{--tt-base:42;}');
+				});
+			});
+			describe('Primary SubHeadline - props.base', () => {
+				before(async () => {
+					component = await getComponent({ base: 42, sub: true });
+				});
+				it('Render <style>.primary-subheadline{--tt-base:42;}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.primary-subheadline{--tt-base:42;}');
+				});
+			});
+			describe('Section Headline - props.base', () => {
+				before(async () => {
+					component = await getComponent({ base: 42, section: true });
+					console.log(component.html);
+				});
+				it('Render <style>.section-headline{--tt-base:42;}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.section-headline{--tt-base:42;}');
+				});
+			});
+			describe('Section subHeadline - props.base', () => {
+				before(async () => {
+					component = await getComponent({ base: 42, section: true, sub: true });
+					console.log(component.html);
+				});
+				it('Render <style>.section-subheadline{--tt-base:42;}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.section-subheadline{--tt-base:42;}');
+				});
+			});
+			describe('Section label - props.base', () => {
+				before(async () => {
+					component = await getComponent({ base: 42, section: true, label: true });
+					console.log(component.html);
+				});
+				it('Render <style>.section-label{--tt-base:42;}</style>', () => {
+					expect(component.html).to.include('style').and.to.include('.section-label{--tt-base:42;}');
+				});
+			});
+		});
+		describe('Section Label - props.section && props.label', () => {
+			before(async () => {
+				component = await getComponent({ section: true, label: true });
+			});
+			it('Render class="section-label"', () => {
+				expect(component.html).to.include('class').and.to.include('section-label');
+			});
+		});
 	});
+	// describe('', () => {
+	// 	before(async () => {
+	// 		component = await getComponent();
+	// 	});
+	// 	it('', () => {
+	// 		expect(component);
+	// 	});
+	// });
 });

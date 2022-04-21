@@ -13,41 +13,56 @@ let { base = 20, scale = 1, js, selectors, pack } = Astro.props as Props;
 
 let overrides: string[];
 if (selectors && !js) {
-	throw Error("prop.js needs to be appended to the `<Typetura/>` component inorder to adjust Typetura's default selectors");
+	throw Error(" prop.js needs to be appended to the `<Typetura/>` component inorder to adjust Typetura's default selectors");
 }
 if (selectors) {
 	if (typeof selectors === 'string') {
 		overrides = selectors.includes(',') ? selectors.split(',') : [selectors];
 	}
 	if (Array.isArray(selectors)) {
-		overrides = selectors;
+		overrides =[...selectors];
 	}
 }
+
+const renderLink = `<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"></script>`
+
 const renderStatement = () => {
 	if (js && overrides) {
-		return `
-			<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"></script>
-		<script>
-		window.typetura={ base:${base},scale:${scale},selectors:[${overrides}]}</script>`;
+
+		return `<script> 
+/** Typetura Settings */
+window.typetura={ 
+		base: ${base} ,
+		scale: ${scale},
+		selectors:[${overrides.reduce((prev,curr)=>([...prev,`'${curr}'`]),'')}]}
+</script>`;
 	}
 	if (js) {
-		return `
-			<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"></script>
-		<script>window.typetura={base:${base},scale:${scale}}</script>`;
+		return `<script>
+/** Typetura Settings */
+window.typetura={
+	base: ${base},
+	scale: ${scale}
+}
+</script>`;
 	}
 	return `
-		<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"></script>
-	<style>
-	:root{
-		--tt-base:${base};
-		--tt-scale:${scale};
-	}
-	</style>`;
+		<style>
+		/* Typetura Settings */
+		:root{
+			--tt-base:${base};
+			--tt-scale:${scale};
+		}
+		</style>`;
+	
 };
 ---
 { Boolean(pack)
   ?
 	<Packages pkg={pack}/>
 	:
-	<Fragment set:html={renderStatement()} />
+	<Fragment set:html={renderLink} />
+}
+{
+	<Fragment set:html={renderStatement()}/>
 }

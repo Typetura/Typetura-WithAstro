@@ -1,6 +1,4 @@
 ---
-import { log } from 'console';
-
 const handleError = (msg: string) => {
 	throw new Error(msg);
 };
@@ -33,13 +31,27 @@ interface PackageProps {
 }
 
 const { pkg } = Astro.props as PackageProps;
+
+if (pkg.split(',').length > 1) {
+	handleError(
+		`⚠ Error from '<Typetura.Packages/>'\n You can only pass through one Typetura Package at a time. Unfortunately Typetura can only hold one Package on a Page at any one time.`
+	);
+}
+
 /**
  * PUBLIC_TYPETURA_KEY  = Public API key
  * Obtained from process.env from build host
  * Else use `.env` to obtain Key
  */
 const API_KEY = process.env.PUBLIC_TYPETURA_KEY || import.meta.env.PUBLIC_TYPETURA_KEY;
-let check;
+let checkAPI, output;
+
+const render = async () => `
+<!--  ${pkg} Font System provided by Typetura -->
+<script src="https://cdn.typetura.com/typetura.js?apiKey=${API_KEY}"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.typetura.com/${pkg.replace(' ', '-').toLowerCase()}/typetura.css?apiKey=${API_KEY}"/>
+<!-- END: Typetura Typography -->`;
+
 if (!API_KEY) {
 	handleError(`
 	⚠ Error from '<Typetura.Packages/>'
@@ -49,23 +61,22 @@ if (!API_KEY) {
 	To signup for an official Typetura Font system visit:
 	https://typetura.com/packages
 	If you have any issues with your API key please contact:
-	support@typetura.com
+	📧support@typetura.com
 	`);
 } else {
-	check = await fetch(`https://cdn.typetura.com/typetura.js?apiKey=${API_KEY}`).then((res) => (res.status === 200 ? true : false));
+	checkAPI = await fetch(`https://cdn.typetura.com/typetura.js?apiKey=${API_KEY}`).then((res) => (res.status === 200 ? true : false));
 }
 
-if (!check) {
+if (!checkAPI) {
 	handleError(`
-	⚠ Error from '<Typetura.Packages/>,\nInvalid API-Key Detected, please check the validity of the key provided.\nIf you are experincing any problems with your API-Key, dont hesitate to contact us directly:\n support@typetura.com`);
+	⚠ Error from '<Typetura.Packages/>
+	An Invalid API-Key has been Detected 
+	Please check the validity of the key provided.
+	
+	If you are experincing any problems with your API key, dont hesitate to contact us directly:\n 📧support@typetura.com`);
+} else {
+	output = await render();
 }
-
-const render = async () => `<script src="https://cdn.typetura.com/typetura.js?apiKey=${API_KEY}"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.typetura.com/${pkg.replace(' ', '-').toLowerCase()}/typetura.css?apiKey=${API_KEY}" />`;
-
-let output = await render();
 ---
 
-<!-- Typetura  Typography -->
 <Fragment set:html={output} />
-<!-- END: Typetura Typography -->

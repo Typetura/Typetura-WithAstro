@@ -1,0 +1,9 @@
+export { default as Typetura } from './Typetura.astro';
+export { default as Blockquote } from './Blockquote.astro';
+export { default as Caption } from './Caption.astro';
+export { default as Headline } from './Headline.astro';
+export { default as Meta } from './Meta.astro';
+export { default as Packages } from './Packages.astro';
+export { default as Pullquote } from './Pullquote.astro';
+export { default as Section } from './Section.astro';
+export { default as Text } from './Text.astro';

@@ -1,4 +1,4 @@
-export type Packages =
+export type Packs =
 	| 'Armonk'
 	| 'Austin'
 	| 'Boston'
@@ -33,4 +33,19 @@ export interface TypeturaProps {
 	js?: boolean;
 	selectors?: string | string[];
 	pkg?: PackageProps;
+}
+
+export interface HeadlineProps {
+	/** Apply as SubHeadline  */
+	sub?: boolean;
+	/** Disable Typetura */
+	none?: boolean;
+	/** Set the Level of Heading Between H1-H3*/
+	level?: string | number;
+	/** Adjust the Scale for this Headline */
+	scale?: number;
+	/** Adjust the Base Size for this Headline */
+	base?: number;
+	/** Adjust the Font Timing for this Headline */
+	ease?: CSSStyleDeclaration['animationTimingFunction'];
 }

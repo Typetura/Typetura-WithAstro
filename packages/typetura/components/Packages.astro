@@ -49,7 +49,7 @@ let checkAPI, output;
 const render = async () => `
 <!--  ${pkg} Font System provided by Typetura -->
 <script src="https://cdn.typetura.com/typetura.js?apiKey=${API_KEY}"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.typetura.com/${pkg.replace(' ', '-').toLowerCase()}/typetura.css?apiKey=${API_KEY}"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.typetura.com/${pkg.replaceAll(' ', '-').toLowerCase()}/typetura.css?apiKey=${API_KEY}"/>
 <!-- END: Typetura Typography -->`;
 
 if (!API_KEY) {

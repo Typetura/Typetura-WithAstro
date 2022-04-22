@@ -1,4 +1,4 @@
-export declare type Packages =
+export declare type Packs =
 	| 'Armonk'
 	| 'Austin'
 	| 'Boston'
@@ -21,14 +21,27 @@ export declare type Packages =
 	| 'Saint Denis'
 	| 'Santa Fe'
 	| 'Stockholm';
-export interface PackageProps {
-	pkg: Packages;
-}
+
 export interface TypeturaProps {
 	cdn?: boolean;
 	base?: number;
 	scale?: number;
 	js?: boolean;
 	selectors?: string | string[];
-	pkg?: PackageProps;
+	pkg?: Packs;
+}
+
+export interface HeadlineProps {
+	/** Apply as SubHeadline  */
+	sub?: boolean;
+	/** Disable Typetura */
+	none?: boolean;
+	/** Set the Level of Heading Between H1-H3*/
+	level?: string | number;
+	/** Adjust the Scale for this Headline */
+	scale?: number;
+	/** Adjust the Base Size for this Headline */
+	base?: number;
+	/** Adjust the Font Timing for this Headline */
+	ease?: CSSStyleDeclaration['animationTimingFunction'];
 }

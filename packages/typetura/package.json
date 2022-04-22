@@ -7,16 +7,24 @@
   "type": "module",
   "types": "./types.d.ts",
   "exports": {
-    ".": "./index.mjs",
-    "./Typetura": "./Typetura.astro",
-    "./Packages": "./Packages.astro",
-    "./types": "./types.ts"
+    ".": "./index.js",
+    "./components": "./components/index.js",
+    "./types": "./types.ts",
+    "./components/Blockquote.astro": "./components/Blockquote.astro",
+    "./components/Caption.astro": "./components/Caption.astro",
+    "./components/Headline.astro": "./components/Headline.astro",
+    "./components/Meta.astro": "./components/Meta.astro",
+    "./components/Package.astro": "./components/Packages.astro",
+    "./components/Pullquote.astro": "./components/Pullquote.astro",
+    "./components/Section.astro": "./components/Section.astro",
+    "./components/Text.astro": "./components/Text.astro",
+    "./components/Typetura.astro": "./components/Typetura.astro",
+    "./Typetura.astro": "./components/Typetura.astro"
   },
   "files": [
-    "index.mjs",
-    "Typetura.astro",
-    "Packages.astro",
-    "types"
+    "index.js",
+    "types",
+    "components/**"
   ],
   "keywords": [
     "typeturajs",

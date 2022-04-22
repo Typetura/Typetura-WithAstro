@@ -1,18 +1,14 @@
 ---
-const handleError = (msg: string) => new Error(msg);
-
-interface HeadlineProps {
+export interface SectionProps {
+	/** Set the Level of Heading Between H2-H5 */
+	level?: string | number;
 	/** Apply as SubHeadline  */
 	sub?: Boolean;
-	/** Apply as a Section */
-	section?: Boolean;
 	/** Apply as a Label */
 	label?: Boolean;
+
 	/** Disable Typetura */
 	none?: Boolean;
-
-	/** Set the Level of Heading */
-	level?: string | number;
 	/** Adjust the Scale for this Headline */
 	scale?: number;
 	/** Adjust the Base Size for this Headline */
@@ -20,16 +16,17 @@ interface HeadlineProps {
 	/** Adjust the Font Timing for this Headline */
 	ease?: CSSStyleDeclaration['animationTimingFunction'];
 }
+const handleError = (msg: string) => {throw new Error(msg)};
 
-let { level, sub, section, label, scale, base, ease, none, ...attrs } = Astro.props as HeadlineProps;
+let { level, sub, label, scale, base, ease, none, ...attrs } = Astro.props as SectionProps;
 
-let Heading: string = 'h1';
+let Section: string = 'h2';
 
 if (typeof level === 'string') {
 	level = +level;
 }
-if (level >= 1 && level <= 4) {
-	Heading = `h${level}`;
+if (level >= 2 && level <= 5) {
+	Section = `h${level}`;
 } else {
 	handleError(`Level: ${level} is out of Range, h1-> h4`);
 }
@@ -43,23 +40,19 @@ if (classes) {
 	additionalClassList = classList;
 }
 
-let pHead:Boolean,
-	pSub:Boolean,
+let 
 	sHead:Boolean,
 	sSub:Boolean,
 	sLabel:Boolean;
-	pHead=pSub=sHead=sSub=sLabel=false
+	sHead=sSub=sLabel=false
 
-if (!Boolean(sub) && !Boolean(section) && !Boolean(label)) pHead = true;
-if (Boolean(sub) && !Boolean(section) && !Boolean(label)) pSub = true;
-if (Boolean(section) && !Boolean(sub) && !Boolean(label)) sHead = true;
-if (Boolean(sub) && Boolean(section) && !Boolean(label)) sSub = true;
-if ((Boolean(section) && Boolean(label)) || Boolean(label)) sLabel = true;
+/** Prop Gate */
+if (!Boolean(sub) && !Boolean(label)) sHead = true;
+if (Boolean(sub) && !Boolean(label)) sSub = true;
+if (Boolean(label) && !Boolean(label)) sLabel = true;
 
 const manageStyling = () => {
 	return `<style>${
-		Boolean(pHead)? `.primary-headline` :
-		Boolean(pSub) ? `.primary-subheadline` :
 		Boolean(sHead)? `.section-headline` :
 		Boolean(sSub) ? `.section-subheadline`:
 		Boolean(sLabel) ? `.section-label`: ``
@@ -71,11 +64,9 @@ const manageStyling = () => {
 	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) ) &&
 	<Fragment set:html={manageStyling()}/> 
 }
-<Heading
+<Section
 	class:list={[
 		{
-			'primary-headline': Boolean(pHead) && true,
-			'primary-subheadline': Boolean(pSub) && true,
 			'section-headline': Boolean(sHead) && true,
 			'section-subheadline': Boolean(sSub) && true,
 			'section-label': Boolean(sLabel) && true,
@@ -85,5 +76,5 @@ const manageStyling = () => {
 	{...attrs}
 >
 	<slot />
-</Heading>
+</Section>
 

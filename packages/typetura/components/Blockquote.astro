@@ -1,0 +1,38 @@
+---
+import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
+export interface BlockQuoteProps{
+	/** Change Type of Quote: defaults to Blockquote */
+	as?: 'blockquote' | 'p' | 'div' 
+	/** Disable Typetura */
+	none?: boolean;
+		/** Adjust the Scale Factor for this BlockQuote */
+	scale?:number
+		/** Adjust the Base Font Size for this BlockQuote */
+	base?:number
+	/** Apply a new Animatiton Key */
+	key?:string
+	/** Adjust the Font Easing for this BlockQuote */
+	ease?: CSSStyleDeclaration['animationTimingFunction']
+
+}
+
+const {as="blockquote", scale, base, ease, key, none, ...attrs} = Astro.props as BlockQuoteProps
+
+const Blockquote = as == null || (/^(blockquote|p|div)$/i).test(as) ? as : handleError('Incorrect HTML entry passed','blockquote')
+
+const {classlist} = getClassesFromAttrs(attrs)
+
+---
+{
+	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) || Boolean(key)) &&
+	<Fragment set:html={ManageStyles('blockquote',key,none,base,scale,ease)}/> 
+}
+<Blockquote
+	class:list={[
+		'blockquote',
+		classlist
+	]}
+	{...attrs}
+>
+	<slot/>
+</Blockquote>

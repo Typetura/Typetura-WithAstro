@@ -1,0 +1,49 @@
+---
+export interface PullQuoteProps{
+	/** Select which type of Caption to use */
+	as?: 'block'  
+	/** Disable Typetura */
+	none?: Boolean;
+		/** Adjust the Scale for this Headline */
+	scale?:number
+		/** Adjust the Base Size for this Headline */
+	base?:number
+	/** Adjust the Font Timing for this Headline */
+	ease?: CSSStyleDeclaration['animationTimingFunction']
+
+}
+const handleError = (msg: string) =>{throw new Error(msg)};
+
+const {as, scale, base, ease, none,...attrs} = Astro.props as PullQuoteProps
+
+const Pullquote =  String(as) || 'p'
+
+let classes = Object.keys(attrs).find((item) => /^class$/i.test(item));
+let additionalClassList = [];
+if (classes) {
+	//@ts-ignore
+	let classList = attrs['class'];
+	//@ts-ignore
+	delete attrs['class'];
+	classList = typeof classList === 'string' ? classList.split(' ') : handleError('Incorrect values passed');
+	additionalClassList = classList;
+}
+
+const manageStyling = () => {
+	return `<style>${`.blockquote`
+	}{${Boolean(none) ? `--tt-key:none;`:''}${Boolean(base) ? `--tt-base:${base};`  :''}${Boolean(ease) ? `--tt-ease:${ease};`  : ''}${Boolean(scale)? `--tt-scale:${scale};`:''}}</style>`;
+};
+---
+{
+	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) ) &&
+	<Fragment set:html={manageStyling()}/> 
+}
+<Pullquote
+	class:list={[
+		'pullquote',
+		additionalClassList
+	]}
+	{...attrs}
+>
+	<slot/>
+</Pullquote>

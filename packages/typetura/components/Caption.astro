@@ -1,0 +1,37 @@
+---
+import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
+
+export interface CaptionProps{
+	/** Select which type of Caption to use */
+	as?:   'p' | 'span' | 'figcaption' | 'div'
+	/** Pass through a custom Keyframe ID */
+	key?: string
+	/** Disable Typetura */
+	none?: boolean;
+		/** Adjust the Scale Factor for this Caption */
+	scale?:number
+		/** Adjust the Base Font Size for this Caption */
+	base?:number
+	/** Adjust the Font Easing for this Caption */
+	ease?: CSSStyleDeclaration['animationTimingFunction']
+
+}
+
+const {as ='p', key, scale, base, ease, none,...attrs} = Astro.props as CaptionProps
+
+const Caption = (/^(span|figcaption|p|div)$/i).test(as) ? as : handleError(`Incorrect HTML entry passed\nYou have tried to pass : ${as}.\nThe Caption Component only recievd the following HTML entries:\n<caption> || <figcaption> || <div> || <p>`,'Caption')
+const {classlist} = getClassesFromAttrs(attrs)
+---
+{
+	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none)|| Boolean(key) ) &&
+	<Fragment set:html={ManageStyles('caption',key,none,base,scale,ease)}/> 
+}
+<Caption
+	class:list={[
+		'caption',
+		classlist
+	]}
+	{...attrs}
+>
+	<slot/>
+</Caption>

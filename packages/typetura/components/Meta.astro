@@ -1,7 +1,10 @@
 ---
+import { getClassesFromAttrs, ManageStyles} from '../utils/utils';
 export interface MetaProps{
 	/** Disable Typetura */
-	none?: Boolean;
+	none?: boolean;
+	/** Pass through a custom Keyframe ID */
+	key?:string
 		/** Adjust the Scale for this Headline */
 	scale?:number
 		/** Adjust the Base Size for this Headline */
@@ -10,35 +13,22 @@ export interface MetaProps{
 	ease?: CSSStyleDeclaration['animationTimingFunction']
 
 }
-const handleError = (msg: string) =>{throw new Error(msg)};
 
-const {scale, base, ease, none,...attrs} = Astro.props as MetaProps
+
+const {scale,key, base, ease, none,...attrs} = Astro.props as MetaProps
 
 const Meta = 'p'
 
-let classes = Object.keys(attrs).find((item) => /^class$/i.test(item));
-let additionalClassList = [];
-if (classes) {
-	//@ts-ignore
-	let classList = attrs['class'];
-	//@ts-ignore
-	delete attrs['class'];
-	classList = typeof classList === 'string' ? classList.split(' ') : handleError('Incorrect values passed');
-	additionalClassList = classList;
-}
-
-const manageStyling = () => {
-	return `<style>${`.meta`}{${Boolean(none) ? `--tt-key:none;`:''}${Boolean(base) ? `--tt-base:${base};`  :''}${Boolean(ease) ? `--tt-ease:${ease};`  : ''}${Boolean(scale)? `--tt-scale:${scale};`:''}}</style>`;
-};
+const {classlist } = getClassesFromAttrs(attrs)
 ---
 {
-	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) ) &&
-	<Fragment set:html={manageStyling()}/> 
+	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) || Boolean(key) ) &&
+	<Fragment set:html={ManageStyles('meta',key,none,base,scale,ease)}/> 
 }
 <Meta
 	class:list={[
 		'meta',
-		additionalClassList
+		classlist
 	]}
 	{...attrs}
 >

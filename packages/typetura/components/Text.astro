@@ -1,11 +1,14 @@
 ---
+import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
 export interface TextProps{
 	/** Apply as Big Text */
 	big?:boolean
 	/** Apply as Small Text */
 	small?:boolean
+	/** Apply a new Animatiton Key */
+	key?: string
 	/** Disable Typetura */
-	none?: Boolean;
+	none?: boolean;
 		/** Adjust the Scale for this Headline */
 	scale?:number
 		/** Adjust the Base Size for this Headline */
@@ -14,41 +17,33 @@ export interface TextProps{
 	ease?: CSSStyleDeclaration['animationTimingFunction']
 
 }
-const handleError = (msg: string) =>{throw new Error(msg)};
 
-const {big, small, scale, base, ease, none,...attrs} = Astro.props as TextProps
+
+const {big, key, small, scale, base, ease, none,...attrs} = Astro.props as TextProps
 
 const Text = 'p'
 
-let classes = Object.keys(attrs).find((item) => /^class$/i.test(item));
-let additionalClassList = [];
-if (classes) {
-	//@ts-ignore
-	let classList = attrs['class'];
-	//@ts-ignore
-	delete attrs['class'];
-	classList = typeof classList === 'string' ? classList.split(' ') : handleError('Incorrect values passed');
-	additionalClassList = classList;
+
+const chooseClass = () => {
+	if(Boolean(big) && !Boolean(small)){
+		return 'big'
+	}
+	if(Boolean(small) && !Boolean(big)){
+		return 'small'
+	}
+	return 'big'
 }
 
-const manageStyling = () => {
-	return `<style>${
-		Boolean(big) && !Boolean(small) ? `.big` :
-		Boolean(small) && !Boolean(big) ? `.small` : `.big`
-	}{${Boolean(none) ? `--tt-key:none;`:''}${Boolean(base) ? `--tt-base:${base};`  :''}${Boolean(ease) ? `--tt-ease:${ease};`  : ''}${Boolean(scale)? `--tt-scale:${scale};`:''}}</style>`;
-};
+const {classlist} = getClassesFromAttrs(attrs)
 ---
 {
-	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) ) &&
-	<Fragment set:html={manageStyling()}/> 
+	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) || Boolean(key)) &&
+	<Fragment set:html={ManageStyles(chooseClass(),key,none,base,scale,ease)}/> 
 }
 <Text
 	class:list={[
-		{
-			'big': (Boolean(big) && !Boolean(small))&& true,
-			'small': (Boolean(small) && !Boolean(big)) && true, 
-		},
-		additionalClassList
+		chooseClass(),
+		classlist
 	]}
 	{...attrs}
 >

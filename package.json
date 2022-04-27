@@ -26,7 +26,8 @@
     "@types/prettier": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^5.12.1",
     "@typescript-eslint/parser": "^5.12.1",
-    "astro-component-tester": "^0.3.0",
+    "astro": "latest",
+    "astro-component-tester": "^0.4.0",
     "chai": "^4.3.6",
     "dotenv": "^16.0.0",
     "eslint": "^8.9.0",
@@ -38,9 +39,7 @@
     "turbo": "^1.2.4",
     "typescript": "^4.5.5"
   },
-  "peerDependencies": {
-    "astro": "latest"
-  },
+  "peerDependencies": {},
   "workspaces": [
     "packages/*",
     "test/*",

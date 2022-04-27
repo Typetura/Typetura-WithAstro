@@ -1,14 +1,16 @@
 ---
+	import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
 export interface SectionProps {
 	/** Set the Level of Heading Between H2-H5 */
 	level?: string | number;
 	/** Apply as SubHeadline  */
-	sub?: Boolean;
+	sub?: boolean;
 	/** Apply as a Label */
-	label?: Boolean;
-
+	label?: boolean;
+	/** Apply a new Animatiton Key */
+	key?:string
 	/** Disable Typetura */
-	none?: Boolean;
+	none?: boolean;
 	/** Adjust the Scale for this Headline */
 	scale?: number;
 	/** Adjust the Base Size for this Headline */
@@ -16,62 +18,45 @@ export interface SectionProps {
 	/** Adjust the Font Timing for this Headline */
 	ease?: CSSStyleDeclaration['animationTimingFunction'];
 }
-const handleError = (msg: string) => {throw new Error(msg)};
 
-let { level, sub, label, scale, base, ease, none, ...attrs } = Astro.props as SectionProps;
+
+let { level=2, sub, label, scale, base, ease, none, key, ...attrs } = Astro.props as SectionProps;
 
 let Section: string = 'h2';
 
-if (typeof level === 'string') {
+if (typeof level === 'string' ) {
 	level = +level;
 }
+//@ts-ignore
 if (level >= 2 && level <= 5) {
 	Section = `h${level}`;
 } else {
-	handleError(`Level: ${level} is out of Range, h1-> h4`);
+	handleError(`Level: ${level} is out of Range:\n\t Accepted Heading range is h2-> h5`,'Section');
 }
 
-let classes = Object.keys(attrs).find((item) => /^class$/i.test(item));
-let additionalClassList = [];
-if (classes) {
-	let classList = attrs['class'];
-	delete attrs['class'];
-	classList = typeof classList === 'string' ? classList.split(' ') : handleError('Incorrect values passed');
-	additionalClassList = classList;
+const {classlist} = getClassesFromAttrs(attrs)
+
+const chooseClass = () => {
+	if(Boolean(sub) && !Boolean(label)){
+		return 'section-subheadline'
+	}
+	if(!Boolean(sub) && Boolean(label)){
+		return 'section-label'
+	}
+	if(!Boolean(sub) && !Boolean(label)){
+		return 'section-headline'
+	}
+	return 'section-headline'
 }
-
-let 
-	sHead:Boolean,
-	sSub:Boolean,
-	sLabel:Boolean;
-	sHead=sSub=sLabel=false
-
-/** Prop Gate */
-if (!Boolean(sub) && !Boolean(label)) sHead = true;
-if (Boolean(sub) && !Boolean(label)) sSub = true;
-if (Boolean(label) && !Boolean(label)) sLabel = true;
-
-const manageStyling = () => {
-	return `<style>${
-		Boolean(sHead)? `.section-headline` :
-		Boolean(sSub) ? `.section-subheadline`:
-		Boolean(sLabel) ? `.section-label`: ``
-	}{${Boolean(none) ? `--tt-key:none;`:''}${Boolean(base) ? `--tt-base:${base};`  :''}${Boolean(ease) ? `--tt-ease:${ease};`  : ''}${Boolean(scale)? `--tt-scale:${scale};`:''}}</style>`;
-};
-
 ---
 {
-	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) ) &&
-	<Fragment set:html={manageStyling()}/> 
+	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) || Boolean(key)) &&
+	<Fragment set:html={ManageStyles(chooseClass(),key,none,base,scale,ease)}/> 
 }
 <Section
 	class:list={[
-		{
-			'section-headline': Boolean(sHead) && true,
-			'section-subheadline': Boolean(sSub) && true,
-			'section-label': Boolean(sLabel) && true,
-		},
-		additionalClassList,
+		chooseClass(),
+		classlist,
 	]}
 	{...attrs}
 >

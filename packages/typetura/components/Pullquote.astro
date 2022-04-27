@@ -1,9 +1,12 @@
 ---
+import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
 export interface PullQuoteProps{
 	/** Select which type of Caption to use */
-	as?: 'block'  
+	is?: 'blockquote' | 'p'  
+		/** Pass through a custom Keyframe ID */
+	key?:string
 	/** Disable Typetura */
-	none?: Boolean;
+	none?: boolean;
 		/** Adjust the Scale for this Headline */
 	scale?:number
 		/** Adjust the Base Size for this Headline */
@@ -12,36 +15,24 @@ export interface PullQuoteProps{
 	ease?: CSSStyleDeclaration['animationTimingFunction']
 
 }
-const handleError = (msg: string) =>{throw new Error(msg)};
 
-const {as, scale, base, ease, none,...attrs} = Astro.props as PullQuoteProps
 
-const Pullquote =  String(as) || 'p'
+const {is = 'p', key, scale, base, ease, none,...attrs} = Astro.props as PullQuoteProps
 
-let classes = Object.keys(attrs).find((item) => /^class$/i.test(item));
-let additionalClassList = [];
-if (classes) {
-	//@ts-ignore
-	let classList = attrs['class'];
-	//@ts-ignore
-	delete attrs['class'];
-	classList = typeof classList === 'string' ? classList.split(' ') : handleError('Incorrect values passed');
-	additionalClassList = classList;
-}
+const Pullquote = (/^(blockquote|p)$/i).test(is) ? is : handleError(`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe PullQuote Component only recieves the following HTML entries:\n<blockquote> the default is <p>`, 'pullquote')
 
-const manageStyling = () => {
-	return `<style>${`.blockquote`
-	}{${Boolean(none) ? `--tt-key:none;`:''}${Boolean(base) ? `--tt-base:${base};`  :''}${Boolean(ease) ? `--tt-ease:${ease};`  : ''}${Boolean(scale)? `--tt-scale:${scale};`:''}}</style>`;
-};
+const {classlist} = getClassesFromAttrs(attrs)
+
+
 ---
 {
-	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) ) &&
-	<Fragment set:html={manageStyling()}/> 
+	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(key) || Boolean(none) ) &&
+	<Fragment set:html={ManageStyles('pullquote',key, none, base, scale, ease)}/> 
 }
 <Pullquote
 	class:list={[
 		'pullquote',
-		additionalClassList
+		classlist
 	]}
 	{...attrs}
 >

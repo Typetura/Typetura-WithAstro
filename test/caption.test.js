@@ -24,7 +24,7 @@ describe('Prop Test: Props.as', () => {
 
 	describe("as = 'span'", () => {
 		before(async () => {
-			component = await getComponent({ as: 'span' });
+			component = await getComponent({ as: 'caption' });
 			console.log(component.html);
 		});
 		it('Render: <caption class="caption"></caption>', () => {

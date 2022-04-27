@@ -24,7 +24,7 @@ describe('Prop Test: Props.as', () => {
 
 	describe("as = 'p'", () => {
 		before(async () => {
-			component = await getComponent({ as: 'p' });
+			component = await getComponent({ is: 'p' });
 		});
 		it('Render: <p class="blockquote"></p>', () => {
 			expect(component.html).to.include('<p class="blockquote">').and.include('</p>');
@@ -32,7 +32,7 @@ describe('Prop Test: Props.as', () => {
 	});
 	describe("as = 'div'", () => {
 		before(async () => {
-			component = await getComponent({ as: 'div' });
+			component = await getComponent({ is: 'div' });
 		});
 		it('Render: <div class="blockquote"></div>', () => {
 			expect(component.html).to.include('<div class="blockquote">').and.include('</div>');
@@ -99,7 +99,6 @@ describe('👓 <Blockquote as="div" key="div" base={42} scale={0.5} ease=\'ease-
 	let component;
 	before(async () => {
 		component = await getComponent({ as: 'div', key: 'div', ease: 'ease-in', base: 42, scale: 0.5 });
-		console.log(component.html);
 	});
 	it('Render: `<style>.blockquote{--tt-key:div;--tt-ease:ease-in;--tt-base:42;--tt-scale:0.5;}</style><div class="blockquote"/>', () => {
 		expect(component.html)
@@ -109,6 +108,6 @@ describe('👓 <Blockquote as="div" key="div" base={42} scale={0.5} ease=\'ease-
 			.and.to.include('--tt-base:42;')
 			.and.to.include('--tt-ease:ease-in;')
 			.and.to.include('div')
-			.and.to.include('class=blockquote');
+			.and.to.include('class="blockquote"');
 	});
 });

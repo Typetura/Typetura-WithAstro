@@ -1,8 +1,6 @@
 ---
-import { Typetura } from 'astro-typetura';
-import type { Packages, TypeturaProps } from 'astro-typetura';
-console.log(Typetura);
-const pkgs: Packages = 'Brussels'.toLowerCase();
+//@ts-ignore
+import { Typetura, Headline, Pullquote, Blockquote, Caption, Meta, Section, Text } from 'astro-typetura';
 ---
 
 <html lang="en">
@@ -10,12 +8,12 @@ const pkgs: Packages = 'Brussels'.toLowerCase();
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>Astro</title>
-		<Typetura js base={40} scale={0.5} />
+		<Typetura pack={'Brussels'} js base={40} scale={0.5} />
 	</head>
 	<body>
 		<header>
-			<h1>Typetura</h1>
-			<h2>Astro Component</h2>
+			<Headline>Welcome Scott</Headline>
+			<Headline sub>Typetura/withastro Components</Headline>
 		</header>
 		<main>
 			<!-- <Heading sub>
@@ -24,41 +22,41 @@ const pkgs: Packages = 'Brussels'.toLowerCase();
 			
 			</Text> -->
 			<div class="wrapper">
-				<h1 class="primary-headline">Primary Headline</h1>
+				<Headline>Primary Headline</Headline>
 			</div>
 			<div class="wraper">
-				<h2 class="primary-subheadline">Sub Headline</h2>
+				<Headline sub level="3">Sub Headline</Headline>
 			</div>
 			<div class="wraper">
-				<h3 class="meta">Meta</h3>
+				<Meta>Meta</Meta>
 			</div>
 			<div class="wraper">
-				<h2 class="section-headline">Section Headline</h2>
+				<Section>Section Headline</Section>
 			</div>
 			<div class="wraper">
-				<h3 class="section-subheadline">Section Sub-headline</h3>
+				<Section sub>Section Sub-headline</Section>
 			</div>
 			<div class="wraper">
-				<h4 class="section-label">Section Label</h4>
+				<Section label level={4}>Section Label</Section>
 			</div>
 			<div class="wraper">
-				<p class="big">Section Headline</p>
+				<Text>Section Headline</Text>
 			</div>
 			<div class="wraper">
-				<p class="big">Big text</p>
-				<p class="big">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, consectetur.</p>
+				<Text>Big text</Text>
+				<Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, consectetur.</Text>
 			</div>
 			<div class="wraper">
-				<p class="small">Small Text</p>
-				<p class="small">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus, laudantium!</p>
+				<Text small>Small Text</Text>
+				<Text small>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus, laudantium!</Text>
 			</div>
 			<div class="wraper">
-				<p class="caption">Caption Text</p>
-				<p class="caption">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ducimus!</p>
+				<Caption>Caption Text</Caption>
+				<Caption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, ducimus!</Caption>
 			</div>
 			<div class="wraper">
-				<p class="pullquote">A Pull Quote</p>
-				<p class="pullquote">Lorem ipsum dolor sit.</p>
+				<Blockquote>A Block Quote</Blockquote>
+				<Pullquote>A Pull Quote</Pullquote>
 			</div>
 		</main>
 	</body>

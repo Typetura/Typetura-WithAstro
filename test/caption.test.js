@@ -1,4 +1,4 @@
-import { expect, should } from 'chai';
+import { expect } from 'chai';
 import { getComponentOutput } from 'astro-component-tester';
 
 export const getComponent = async (props) => {
@@ -19,29 +19,28 @@ describe('Primary render test: <Caption/> ', () => {
 	});
 });
 
-describe('Prop Test: Props.as', () => {
+describe('Prop Test: Props.is', () => {
 	let component;
 
-	describe("as = 'span'", () => {
+	describe("is = 'caption'", () => {
 		before(async () => {
-			component = await getComponent({ as: 'caption' });
-			console.log(component.html);
+			component = await getComponent({ is: 'caption' });
 		});
 		it('Render: <caption class="caption"></caption>', () => {
 			expect(component.html).to.include('<caption class="caption">').and.include('</caption>');
 		});
 	});
-	describe("as = 'figcaption'", () => {
+	describe("is = 'figcaption'", () => {
 		before(async () => {
-			component = await getComponent({ as: 'figcaption' });
+			component = await getComponent({ is: 'figcaption' });
 		});
 		it('Render: <figcaption class="caption"></figcaption>', () => {
 			expect(component.html).to.include('<figcaption class="caption">').and.include('</figcaption>');
 		});
 	});
-	describe("as = 'div'", () => {
+	describe("is = 'div'", () => {
 		before(async () => {
-			component = await getComponent({ as: 'div' });
+			component = await getComponent({ is: 'div' });
 		});
 		it('Render: <div class="caption"></div>', () => {
 			expect(component.html).to.include('<div class="caption">').and.include('</div>');
@@ -104,13 +103,12 @@ describe('Prop Test: Props.ease', () => {
 		expect(component.html).to.include('style').and.to.include('--tt-ease:ease-in;');
 	});
 });
-describe('👓 <Caption as="div" key="div" base={42} scale={0.5} ease=\'ease-in\'/>', () => {
+describe('👓 <Caption is="div" key="div" base={42} scale={0.5} ease=\'ease-in\'/>', () => {
 	let component;
 	before(async () => {
-		component = await getComponent({ as: 'div', key: 'div', ease: 'ease-in', base: 42, scale: 0.5 });
-		console.log(component.html);
+		component = await getComponent({ is: 'div', key: 'div', ease: 'ease-in', base: 42, scale: 0.5, id: 'test' });
 	});
-	it('Render: `<style>.caption {--tt-key:div;--tt-ease:ease-in;--tt-base:42;--tt-scale:0.5;}</style><div class="caption"/>', () => {
+	it('Render: `<style>.caption {--tt-key:div;--tt-ease:ease-in;--tt-base:42;--tt-scale:0.5;}</style><div class="caption" id="test">', () => {
 		expect(component.html)
 			.to.include('style')
 			.and.to.include('--tt-key:div;')
@@ -118,6 +116,7 @@ describe('👓 <Caption as="div" key="div" base={42} scale={0.5} ease=\'ease-in\
 			.and.to.include('--tt-base:42;')
 			.and.to.include('--tt-scale:0.5;')
 			.and.to.include('div')
-			.and.to.include(`class="caption"`);
+			.and.to.include(`class="caption"`)
+			.and.to.include('id="test"');
 	});
 });

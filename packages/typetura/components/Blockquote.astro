@@ -2,7 +2,7 @@
 import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
 export interface BlockQuoteProps{
 	/** Change Type of Quote: defaults to Blockquote */
-	as?: 'blockquote' | 'p' | 'div' 
+	is?: 'blockquote' | 'p' | 'div' 
 	/** Disable Typetura */
 	none?: boolean;
 		/** Adjust the Scale Factor for this BlockQuote */
@@ -16,9 +16,9 @@ export interface BlockQuoteProps{
 
 }
 
-const {as="blockquote", scale, base, ease, key, none, ...attrs} = Astro.props as BlockQuoteProps
+const {is="blockquote", scale, base, ease, key, none, ...attrs} = Astro.props as BlockQuoteProps
 
-const Blockquote = as == null || (/^(blockquote|p|div)$/i).test(as) ? as : handleError('Incorrect HTML entry passed','blockquote')
+const Blockquote = is == null || (/^(blockquote|p|div)$/i).test(is) ? is : handleError('Incorrect HTML entry passed','blockquote')
 
 const {classlist} = getClassesFromAttrs(attrs)
 

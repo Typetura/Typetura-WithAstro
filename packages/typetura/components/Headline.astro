@@ -1,11 +1,14 @@
 ---
+import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
 export interface HeadlineProps {
-	/** Apply as SubHeadline  */
-	sub?: Boolean;
-	/** Disable Typetura */
-	none?: Boolean;
 	/** Set the Level of Heading Between H1-H3*/
 	level?: string | number;
+	/** Apply as SubHeadline  */
+	sub?: boolean;
+	/** Disable Typetura */
+	none?: boolean;
+	/** Apply a new Animatiton Key */
+	key?:string
 	/** Adjust the Scale for this Headline */
 	scale?: number;
 	/** Adjust the Base Size for this Headline */
@@ -14,9 +17,9 @@ export interface HeadlineProps {
 	ease?: CSSStyleDeclaration['animationTimingFunction'];
 	
 }
-const handleError = (msg: string) => new Error(msg);
 
-let { level, sub, scale, base, ease, none, ...attrs } = Astro.props as HeadlineProps;
+
+let { level=1, sub, scale, base, ease, none, key, ...attrs } = Astro.props as HeadlineProps;
 
 let Heading: string = 'h1';
 
@@ -30,27 +33,16 @@ if (level >= 1 && level <= 3) {
 	handleError(`Level: ${level} is out of Range, h1-> h3`);
 }
 
-let classes = Object.keys(attrs).find((item) => /^class$/i.test(item));
-let additionalClassList = [];
-if (classes) {
-	let classList = attrs['class'];
-	delete attrs['class'];
-	classList = typeof classList === 'string' ? classList.split(' ') : handleError('Incorrect values passed');
-	additionalClassList = classList;
-}
-
-
-
-const manageStyling = () => {
-	return `<style>${
-		Boolean(sub) ? `.primary-subheadline` : `.primary-headline`
-	}{${Boolean(none) ? `--tt-key:none;`:''}${Boolean(base) ? `--tt-base:${base};`  :''}${Boolean(ease) ? `--tt-ease:${ease};`  : ''}${Boolean(scale)? `--tt-scale:${scale};`:''}}</style>`;
-};
+const {classlist} = getClassesFromAttrs(attrs)
 
 ---
 {
-	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) ) &&
-	<Fragment set:html={manageStyling()}/> 
+	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) || Boolean(key)) &&
+	<Fragment set:html={ManageStyles(
+		(Boolean(sub)
+		?'primary-subheadline'
+		: 'primary-headline'
+		),key,none,base,scale,ease)}/> 
 }
 <Heading
 	class:list={[
@@ -58,7 +50,7 @@ const manageStyling = () => {
 			'primary-headline': !Boolean(sub) && true,
 			'primary-subheadline': Boolean(sub) && true,
 		},
-		additionalClassList,
+		classlist,
 	]}
 	{...attrs}
 >

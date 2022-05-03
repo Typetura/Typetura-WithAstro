@@ -1,35 +1,27 @@
 ---
-import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
-export interface BlockQuoteProps{
-	/** Change Type of Quote: defaults to Blockquote */
-	is?: 'blockquote' | 'p' | 'div' 
-	/** Disable Typetura */
-	none?: boolean;
-		/** Adjust the Scale Factor for this BlockQuote */
-	scale?:number
-		/** Adjust the Base Font Size for this BlockQuote */
-	base?:number
-	/** Apply a new Animatiton Key */
-	key?:string
-	/** Adjust the Font Easing for this BlockQuote */
-	ease?: CSSStyleDeclaration['animationTimingFunction']
+import { handleError,getClassesFromAttrs, ManageStyles, ScopedStyleName} from '../utils/utils';
+import type { StyleProps } from '../types';
 
+export interface BlockQuoteProps extends StyleProps{
+	/** Change Quote Element: defaults to Blockquote */
+	is?: 'blockquote' | 'p' | 'div'
 }
 
 const {is="blockquote", scale, base, ease, key, none, ...attrs} = Astro.props as BlockQuoteProps
 
-const Blockquote = is == null || (/^(blockquote|p|div)$/i).test(is) ? is : handleError('Incorrect HTML entry passed','blockquote')
+const Blockquote = (/^(blockquote|p|div)$/i).test(is) ? is : handleError('Incorrect HTML entry passed: ' + is, 'blockquote')
 
 const {classlist} = getClassesFromAttrs(attrs)
 
+const {scopedClass} = ScopedStyleName('blockquote')
 ---
 {
 	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) || Boolean(key)) &&
-	<Fragment set:html={ManageStyles('blockquote',key,none,base,scale,ease)}/> 
+	<style set:html={ManageStyles(scopedClass,key,none,base,scale,ease)}/> 
 }
 <Blockquote
 	class:list={[
-		'blockquote',
+		scopedClass,
 		classlist
 	]}
 	{...attrs}

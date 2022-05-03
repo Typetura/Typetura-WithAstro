@@ -8,7 +8,7 @@ export interface CaptionProps  extends StyleProps {
 
 const {is ='p', key, scale, base, ease, none,...attrs} = Astro.props as CaptionProps
 
-const Caption = (/^(caption|figcaption|p|div)$/i).test(is) ? is : handleError(`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe Caption Component only recieves the following HTML entries:\n<caption> || <figcaption> || <div> || <p>`,'Caption')
+const Caption = is == null || (/^(caption|figcaption|p|div)$/i).test(is) ? is : handleError(`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe Caption Component only recieves the following HTML entries:\n<caption> || <figcaption> || <div> || <p>`,'Caption')
 
 const {classlist} = getClassesFromAttrs(attrs)
 

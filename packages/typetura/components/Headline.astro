@@ -1,59 +1,44 @@
 ---
-import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
-export interface HeadlineProps {
-	/** Set the Level of Heading Between H1-H3*/
-	level?: string | number;
-	/** Apply as SubHeadline  */
-	sub?: boolean;
-	/** Disable Typetura */
-	none?: boolean;
-	/** Apply a new Animatiton Key */
-	key?:string
-	/** Adjust the Scale for this Headline */
-	scale?: number;
-	/** Adjust the Base Size for this Headline */
-	base?: number;
-	/** Adjust the Font Timing for this Headline */
-	ease?: CSSStyleDeclaration['animationTimingFunction'];
+import { getClassesFromAttrs, ManageStyles, HeadingLevels, ScopedStyleName} from '../utils/utils';
+import type { HeadlineProps } from '../types';
+// export interface HeadlineProps {
+// 	/** Set the Level of Heading Between H1-H3*/
+// 	level?: string | number;
+// 	/** Apply as SubHeadline  */
+// 	sub?: boolean;
+// 	/** Disable Typetura */
+// 	none?: boolean;
+// 	/** Apply a new Animatiton Key */
+// 	key?:string
+// 	/** Adjust the Scale for this Headline */
+// 	scale?: number;
+// 	/** Adjust the Base Size for this Headline */
+// 	base?: number;
+// 	/** Adjust the Font Timing for this Headline */
+// 	ease?: CSSStyleDeclaration['animationTimingFunction'];
 	
-}
+// }
 
+let { level=1, scale, base, ease, none, key, ...attrs } = Astro.props as HeadlineProps;
 
-let { level=1, sub, scale, base, ease, none, key, ...attrs } = Astro.props as HeadlineProps;
-
-let Heading: string = 'h1';
-
-if (typeof level === 'string') {
-	level = level.startsWith('h') ? +level.substring(1) : +level;
-}
-//@ts-ignore
-if (level >= 1 && level <= 3) {
-	Heading = `h${level}`;
-} else {
-	handleError(`Level: ${level} is out of Range, h1-> h3`);
-}
+const Headline: string = HeadingLevels(level,[1,3],'Headline')
 
 const {classlist} = getClassesFromAttrs(attrs)
+
+const {scopedClass} = ScopedStyleName('primary-headline')
 
 ---
 {
 	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) || Boolean(key)) &&
-	<Fragment set:html={ManageStyles(
-		(Boolean(sub)
-		?'primary-subheadline'
-		: 'primary-headline'
-		),key,none,base,scale,ease)}/> 
+	<style set:html={ManageStyles(scopedClass,key,none,base,scale,ease)}/> 
 }
-<Heading
+<Headline
 	class:list={[
-		{
-			'primary-headline': !Boolean(sub) && true,
-			'primary-subheadline': Boolean(sub) && true,
-		},
+		scopedClass,
 		classlist,
 	]}
 	{...attrs}
 >
 	<slot />
-</Heading>
+</Headline>
 

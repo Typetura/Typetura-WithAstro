@@ -20,9 +20,25 @@ describe('Test: <Headline />', () => {
 				expect(component.html).to.include('h1');
 			});
 		});
+		describe('level = "h1"', () => {
+			before(async () => {
+				component = await getComponent({ level: 'h1' });
+			});
+			it('Render <h1>', () => {
+				expect(component.html).to.include('h1');
+			});
+		});
 		describe('level = 2', () => {
 			before(async () => {
 				component = await getComponent({ level: 2 });
+			});
+			it('Render <h2>', () => {
+				expect(component.html).to.include('h2');
+			});
+		});
+		describe('level = "h2"', () => {
+			before(async () => {
+				component = await getComponent({ level: 'h2' });
 			});
 			it('Render <h2>', () => {
 				expect(component.html).to.include('h2');
@@ -36,25 +52,13 @@ describe('Test: <Headline />', () => {
 				expect(component.html).to.include('h3');
 			});
 		});
-	});
-});
-
-describe('Props Test: Props.sub', () => {
-	let component;
-	describe('Control Test : No Props.sub', () => {
-		before(async () => {
-			component = await getComponent();
-		});
-		it('Render class="primary-headline"', () => {
-			expect(component.html).to.include('class').and.to.include('primary-headline');
-		});
-	});
-	describe('Test SubHeadline : Props.sub', () => {
-		before(async () => {
-			component = await getComponent({ sub: true });
-		});
-		it('Render class="primary-subheadline', () => {
-			expect(component.html).to.include('class').and.to.include('primary-subheadline');
+		describe('level = "h3"', () => {
+			before(async () => {
+				component = await getComponent({ level: 'h3' });
+			});
+			it('Render <h3>', () => {
+				expect(component.html).to.include('h3');
+			});
 		});
 	});
 });
@@ -116,5 +120,25 @@ describe('Test: Prop.none', () => {
 	});
 	it('Render: <style>.primary-headline {--tt-key:none;}', () => {
 		expect(component.html).to.include('style').and.to.include('--tt-key:none;');
+	});
+});
+describe('👓 <Headline  key="special" base={42} scale={0.5} ease=\'ease-in\' id="test"/>', () => {
+	let component;
+	before(async () => {
+		component = await getComponent({ level: 'h2', key: 'special', ease: 'ease-in', base: 42, scale: 0.5, id: 'test', class: 'flex red' });
+		console.log(component.html);
+	});
+	it('Render: `<style>.primary-headline-**UUID** {--tt-key:special;--tt-ease:ease-in;--tt-base:42;--tt-scale:0.5;}</style><h2 class="primary-headline-**UUID** flex red"/>', () => {
+		expect(component.html)
+			.to.include('style')
+			.and.to.include('primary-headline')
+			.and.to.include('--tt-key:special;')
+			.and.to.include('--tt-ease:ease-in;')
+			.and.to.include('--tt-base:42;')
+			.and.to.include('--tt-scale:0.5;')
+			.and.to.include('h2')
+			.and.to.include('class')
+			.and.to.include(`flex red"`)
+			.and.to.include('id="test"');
 	});
 });

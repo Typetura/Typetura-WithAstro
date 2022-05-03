@@ -1,48 +1,29 @@
 ---
-import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
-export interface TextProps{
+import { getClassesFromAttrs, ManageStyles, ScopedStyleName} from '../utils/utils';
+import type { StyleProps } from '../types';
+export interface TextProps extends StyleProps{
 	/** Apply as Big Text */
 	big?:boolean
 	/** Apply as Small Text */
 	small?:boolean
-	/** Apply a new Animatiton Key */
-	key?: string
-	/** Disable Typetura */
-	none?: boolean;
-		/** Adjust the Scale for this Headline */
-	scale?:number
-		/** Adjust the Base Size for this Headline */
-	base?:number
-	/** Adjust the Font Timing for this Headline */
-	ease?: CSSStyleDeclaration['animationTimingFunction']
 
 }
-
 
 const {big, key, small, scale, base, ease, none,...attrs} = Astro.props as TextProps
 
 const Text = 'p'
 
-
-const chooseClass = () => {
-	if(Boolean(big) && !Boolean(small)){
-		return 'big'
-	}
-	if(Boolean(small) && !Boolean(big)){
-		return 'small'
-	}
-	return 'big'
-}
+const {scopedClass} = ScopedStyleName((big ? 'big' : small ? 'small' : 'regular'))
 
 const {classlist} = getClassesFromAttrs(attrs)
 ---
 {
 	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) || Boolean(key)) &&
-	<Fragment set:html={ManageStyles(chooseClass(),key,none,base,scale,ease)}/> 
+	<style set:html={ManageStyles(scopedClass,key,none,base,scale,ease)}/> 
 }
 <Text
 	class:list={[
-		chooseClass(),
+		scopedClass,
 		classlist
 	]}
 	{...attrs}

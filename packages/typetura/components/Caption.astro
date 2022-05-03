@@ -1,34 +1,26 @@
 ---
-import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
-
-export interface CaptionProps{
+import { handleError,getClassesFromAttrs, ManageStyles, ScopedStyleName} from '../utils/utils';
+import type { StyleProps } from '../types';
+export interface CaptionProps  extends StyleProps {
 	/** Select which type of Caption to use */
 	is?:   'p' | 'caption' | 'figcaption' | 'div'
-	/** Pass through a custom Keyframe ID */
-	key?: string
-	/** Disable Typetura */
-	none?: boolean;
-		/** Adjust the Scale Factor for this Caption */
-	scale?:number
-		/** Adjust the Base Font Size for this Caption */
-	base?:number
-	/** Adjust the Font Easing for this Caption */
-	ease?: CSSStyleDeclaration['animationTimingFunction']
-
 }
 
 const {is ='p', key, scale, base, ease, none,...attrs} = Astro.props as CaptionProps
 
-const Caption = (/^(caption|figcaption|p|div)$/i).test(is) ? is : handleError(`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe Caption Component can only recieve the following HTML entries:\n<caption> || <figcaption> || <div> || <p>`,'Caption')
+const Caption = (/^(caption|figcaption|p|div)$/i).test(is) ? is : handleError(`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe Caption Component only recieves the following HTML entries:\n<caption> || <figcaption> || <div> || <p>`,'Caption')
+
 const {classlist} = getClassesFromAttrs(attrs)
+
+const {scopedClass} = ScopedStyleName('caption')
 ---
 {
 	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none)|| Boolean(key) ) &&
-	<Fragment set:html={ManageStyles('caption',key,none,base,scale,ease)}/> 
+	<style set:html={ManageStyles(scopedClass,key,none,base,scale,ease)}/> 
 }
 <Caption
 	class:list={[
-		'caption',
+		scopedClass,
 		classlist
 	]}
 	{...attrs}

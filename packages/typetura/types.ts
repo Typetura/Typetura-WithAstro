@@ -23,29 +23,36 @@ export type Packs =
 	| 'Stockholm';
 
 export interface PackageProps {
-	pkg: Packages;
+	package: Packs;
 }
 
 export interface TypeturaProps {
-	cdn?: boolean;
+	/** Set Base Value for Fonts */
 	base?: number;
+	/** Set Scale Value */
 	scale?: number;
+	/** Use JS to Apply overrides */
 	js?: boolean;
+	/** Apply additional Selectors */
 	selectors?: string | string[];
-	pkg?: PackageProps;
+	/** Use Typetura's Custom Font Packs */
+	pack?: Packs;
 }
 
-export interface HeadlineProps {
-	/** Apply as SubHeadline  */
-	sub?: boolean;
+export interface HeadlineProps extends StyleProps {
+	/** Configure Heading level  */
+	level?: number | string;
+}
+
+export interface StyleProps {
+	/** Apply a new Animatiton Key */
+	key?: string;
 	/** Disable Typetura */
 	none?: boolean;
-	/** Set the Level of Heading Between H1-H3*/
-	level?: string | number;
-	/** Adjust the Scale for this Headline */
+	/** Adjust the Scale for this Component */
 	scale?: number;
-	/** Adjust the Base Size for this Headline */
+	/** Adjust the Base Size for this Component */
 	base?: number;
-	/** Adjust the Font Timing for this Headline */
+	/** Adjust the Font Timing for this Component */
 	ease?: CSSStyleDeclaration['animationTimingFunction'];
 }

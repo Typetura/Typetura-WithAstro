@@ -1,6 +1,8 @@
 ---
 //@ts-ignore
-import { Typetura, Headline, Pullquote, Blockquote, Caption, Meta, Section, Text } from 'astro-typetura';
+import { Typetura, Headline, Pullquote, Blockquote, Caption, Meta, SectionHeadline, SectionSubHeadline, Text, SubHeadline } from 'astro-typetura';
+
+
 ---
 
 <html lang="en">
@@ -8,12 +10,12 @@ import { Typetura, Headline, Pullquote, Blockquote, Caption, Meta, Section, Text
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>Astro</title>
-		<Typetura pack={'Brussels'} js base={40} scale={0.5} />
+		<Typetura  pack={'Santa fe'} js base={40} scale={1.5} />
 	</head>
 	<body>
 		<header>
-			<Headline>Welcome Scott</Headline>
-			<Headline sub>Typetura/withastro Components</Headline>
+			<Headline >Welcome Scott</Headline>
+			<SubHeadline base={42}>Typetura/withastro Components</SubHeadline>
 		</header>
 		<main>
 			<!-- <Heading sub>
@@ -25,26 +27,27 @@ import { Typetura, Headline, Pullquote, Blockquote, Caption, Meta, Section, Text
 				<Headline>Primary Headline</Headline>
 			</div>
 			<div class="wraper">
-				<Headline sub level="3">Sub Headline</Headline>
+				<SubHeadline level="5" base={42}>Sub Headline</SubHeadline>
+				<SubHeadline>Sub Headline</SubHeadline>
 			</div>
 			<div class="wraper">
 				<Meta>Meta</Meta>
 			</div>
 			<div class="wraper">
-				<Section>Section Headline</Section>
+				SectionHeadline
+				<SectionHeadline  base={50} >Section Headline</SectionHeadline>
 			</div>
 			<div class="wraper">
-				<Section sub>Section Sub-headline</Section>
+				SectionSubheadline
+				<SectionSubHeadline ease="easy">Section Sub-headline</SectionSubHeadline>
 			</div>
-			<div class="wraper">
-				<Section label level={4}>Section Label</Section>
-			</div>
+			<div class="wraper">SectionLabel</div>
 			<div class="wraper">
 				<Text>Section Headline</Text>
 			</div>
 			<div class="wraper">
-				<Text>Big text</Text>
-				<Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, consectetur.</Text>
+				<Text big>Big text</Text>
+				<Text big>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, consectetur.</Text>
 			</div>
 			<div class="wraper">
 				<Text small>Small Text</Text>

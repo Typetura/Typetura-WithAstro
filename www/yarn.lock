@@ -504,8 +504,9 @@ ast-types@0.14.2, ast-types@^0.14.2:
   dependencies:
     tslib "^2.0.1"
 
-"astro-typetura@file:../packages/typetura":
-  version "0.0.1"
+"astro-typetura@link:../packages/typetura":
+  version "0.0.0"
+  uid ""
 
 astro@^1.0.0-beta.10:
   version "1.0.0-beta.10"

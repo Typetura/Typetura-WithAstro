@@ -13,6 +13,6 @@
     "astro": "^1.0.0-beta.10"
   },
   "dependencies": {
-    "astro-typetura": "file:../packages/typetura"
+    "astro-typetura": "link:../packages/typetura"
   }
 }

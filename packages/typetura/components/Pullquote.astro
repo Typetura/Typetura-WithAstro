@@ -1,37 +1,28 @@
 ---
-import { handleError,getClassesFromAttrs, ManageStyles} from '../utils/utils';
-export interface PullQuoteProps{
+import { StyleProps } from '../types';
+import { handleError,getClassesFromAttrs, ManageStyles, ScopedStyleName} from '../utils/utils';
+
+export interface PullQuoteProps extends StyleProps{
 	/** Select which type of Caption to use */
 	is?: 'blockquote' | 'p'  
-		/** Pass through a custom Keyframe ID */
-	key?:string
-	/** Disable Typetura */
-	none?: boolean;
-		/** Adjust the Scale for this Headline */
-	scale?:number
-		/** Adjust the Base Size for this Headline */
-	base?:number
-	/** Adjust the Font Timing for this Headline */
-	ease?: CSSStyleDeclaration['animationTimingFunction']
 
 }
-
 
 const {is = 'p', key, scale, base, ease, none,...attrs} = Astro.props as PullQuoteProps
 
-const Pullquote = (/^(blockquote|p)$/i).test(is) ? is : handleError(`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe PullQuote Component only recieves the following HTML entries:\n<blockquote> the default is <p>`, 'pullquote')
+const Pullquote = is == null || (/^(blockquote|p)$/i).test(is) ? is : handleError(`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe PullQuote Component only recieves the following HTML entries:\n<blockquote> the default is <p>`, 'pullquote')
 
 const {classlist} = getClassesFromAttrs(attrs)
 
-
+const {scopedClass} = ScopedStyleName('pullquote')
 ---
 {
 	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(key) || Boolean(none) ) &&
-	<Fragment set:html={ManageStyles('pullquote',key, none, base, scale, ease)}/> 
+	<style set:html={ManageStyles(scopedClass,key, none, base, scale, ease)}/> 
 }
 <Pullquote
 	class:list={[
-		'pullquote',
+		scopedClass,
 		classlist
 	]}
 	{...attrs}

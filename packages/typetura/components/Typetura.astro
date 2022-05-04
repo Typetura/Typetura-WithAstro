@@ -18,6 +18,7 @@ export interface Props {
 let { base = 20, scale = 1, js, selectors, pack } = Astro.props as Props;
 
 let overrides: string[];
+
 if (selectors && !js) {
 	throw Error(" prop.js needs to be appended to the `<Typetura/>` component inorder to adjust Typetura's default selectors");
 }
@@ -34,13 +35,12 @@ const renderLink = `<script src="https://cdn.jsdelivr.net/gh/scottkellum/typetur
 
 const renderStatement = () => {
 	if (js && overrides) {
-
 		return `<script> 
 /** Typetura Settings */
 window.typetura={ 
 		base: ${base} ,
 		scale: ${scale},
-		selectors:[${overrides.reduce((prev,curr)=>([...prev,`'${curr}'`]),'')}]}
+		selectors:[${overrides.reduce((prev,curr)=>([...prev,`'${curr}'`]),'')}]} 
 </script>`;
 	}
 	if (js) {

@@ -1,7 +1,6 @@
 ---
-const handleError = (msg: string) => {
-	throw new Error(msg);
-};
+import { handleError } from '../utils/utils';
+
 type Packages =
 	| 'Armonk'
 	| 'Austin'
@@ -33,9 +32,7 @@ interface PackageProps {
 const { pkg } = Astro.props as PackageProps;
 
 if (pkg.split(',').length > 1) {
-	handleError(
-		`⚠ Error from '<Typetura.Packages/>'\n You can only pass through one Typetura Package at a time. Unfortunately Typetura can only hold one Package on a Page at any one time.`
-	);
+	handleError(`You can only pass through one Typetura Package at a time. Typetura can only hold one Package on a Page at any one time.`, 'Packages');
 }
 
 /**
@@ -68,12 +65,14 @@ if (!API_KEY) {
 }
 
 if (!checkAPI) {
-	handleError(`
-	⚠ Error from '<Typetura.Packages/>
+	handleError(
+		`
 	An Invalid API-Key has been Detected 
 	Please check the validity of the key provided.
 	
-	If you are experincing any problems with your API key, dont hesitate to contact us directly:\n 📧support@typetura.com`);
+	If you are experincing any problems with your API key, dont hesitate to contact us directly:\n 📧support@typetura.com`,
+		'Packages'
+	);
 } else {
 	output = await render();
 }

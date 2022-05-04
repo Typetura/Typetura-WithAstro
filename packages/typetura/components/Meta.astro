@@ -1,33 +1,22 @@
 ---
-import { getClassesFromAttrs, ManageStyles} from '../utils/utils';
-export interface MetaProps{
-	/** Disable Typetura */
-	none?: boolean;
-	/** Pass through a custom Keyframe ID */
-	key?:string
-		/** Adjust the Scale for this Headline */
-	scale?:number
-		/** Adjust the Base Size for this Headline */
-	base?:number
-	/** Adjust the Font Timing for this Headline */
-	ease?: CSSStyleDeclaration['animationTimingFunction']
-
-}
+import { StyleProps } from '../types';
+import { getClassesFromAttrs, ManageStyles, ScopedStyleName} from '../utils/utils';
 
 
-const {scale,key, base, ease, none,...attrs} = Astro.props as MetaProps
+const {scale,key, base, ease, none,...attrs} = Astro.props as StyleProps
 
 const Meta = 'p'
 
 const {classlist } = getClassesFromAttrs(attrs)
+const {scopedClass} = ScopedStyleName('meta')
 ---
 {
 	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) || Boolean(key) ) &&
-	<Fragment set:html={ManageStyles('meta',key,none,base,scale,ease)}/> 
+	<style set:html={ManageStyles(scopedClass,key,none,base,scale,ease)}/> 
 }
 <Meta
 	class:list={[
-		'meta',
+		scopedClass,
 		classlist
 	]}
 	{...attrs}

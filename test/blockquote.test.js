@@ -1,4 +1,4 @@
-import { expect, should } from 'chai';
+import { expect } from 'chai';
 import { getComponentOutput } from 'astro-component-tester';
 
 export const getComponent = async (props) => {

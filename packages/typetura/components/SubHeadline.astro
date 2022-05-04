@@ -1,0 +1,27 @@
+---
+import { HeadlineProps } from '../types';
+import { getClassesFromAttrs, ManageStyles, ScopedStyleName, HeadingLevels} from '../utils/utils';
+
+let { level=2, scale, base, ease, none, key, ...attrs } = Astro.props as HeadlineProps;
+
+let SubHeadline: string = HeadingLevels(level,[2,5],'SubHeadline')
+
+const {classlist} = getClassesFromAttrs(attrs)
+
+const {scopedClass} = ScopedStyleName('primary-subheadline')
+---
+{
+	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) || Boolean(key)) &&
+	<style set:html={ManageStyles(
+		scopedClass
+		,key,none,base,scale,ease)}/> 
+}
+<SubHeadline
+	class:list={[
+		scopedClass,
+		classlist,
+	]}
+	{...attrs}
+>
+	<slot />
+</SubHeadline>

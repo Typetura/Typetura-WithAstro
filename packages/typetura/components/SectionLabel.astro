@@ -1,0 +1,26 @@
+---
+import { HeadlineProps } from '../types';
+import { getClassesFromAttrs, ManageStyles, ScopedStyleName, HeadingLevels} from '../utils/utils';
+
+let { level=3, scale, base, ease, none, key, ...attrs } = Astro.props as HeadlineProps;
+
+let SectionLabel: string = HeadingLevels(level,[3,6],'SectionLabel')
+
+const {classlist} = getClassesFromAttrs(attrs)
+
+const {scopedClass} = ScopedStyleName('section-label')
+
+---
+{
+	(Boolean(base) || Boolean(scale) || Boolean(ease) || Boolean(none) || Boolean(key)) &&
+	<style set:html={ManageStyles(scopedClass,key,none,base,scale,ease)}/> 
+}
+<SectionLabel
+	class:list={[
+		scopedClass,
+		classlist,
+	]}
+	{...attrs}
+>
+	<slot />
+</SectionLabel>

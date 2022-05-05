@@ -11,7 +11,9 @@
     "index.ts"
   ],
   "scripts": {
-    "test": "mocha --parallel --timeout 15000",
+    "setup": "yarn; cd www && yarn;",
+    "testAll": "mocha --exit --recursive --timeout 15000",
+    "testOne": "mocha --parrallel --timeout 15000 -f",
     "format": "prettier -w .",
     "lint": "eslint . --ext .ts,.js",
     "dev": "cd www && astro dev",

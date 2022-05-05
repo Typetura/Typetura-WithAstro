@@ -1,28 +1,53 @@
-# Astro Component Template 🧑‍🚀
+# Astro Typetura  
 
-This is a template meant to ease the development of components for [Astro](https://astro.build/) that are intended for distribution. It does so by providing you with:
+Set of [Typetura](typetura.com) components built for use with [Astro](astro.build).
 
-- A clear default directory structure
-- Proper TypeScript settings for working with Astro
-- Default settings for ESLint, Prettier and EditorConfig inspired by the formatting used in the Astro project itself (also, [the config files are typed 👀](https://princesseuh.netlify.app/article/youshouldtypeyourconfigfiles/))
-- Ready-to-use testing tools powered by the libraries also used by the Astro project (Mocha and Chai), also contain [astro-component-tester](https://github.com/Princesseuh/astro-component-tester) to help you test the output of your component(s)
-- Preconfigured VS Code workspace settings file with settings meant to make development cozy and nice
+## 🌐 View Website
 
-Hopefully, all of this together will provide you with a fun and comfortable development environnement for working on your Astro component! 🚀 Also, never forget that this is only a template to get you started, if you don't agree with any of the choices made, feel free to change it to fit your project better!
+For more information on Typeture, our products and services please visit: (Typetura)[typetura.com]
+## 📚 Docs
 
-**⚠️ Don't forget:** You should edit `package.json` with the info relevant to your project, such as a proper `name`, a license, a link to the repository for the npm website and other settings. You should also adjust the Astro `peerDependency` to the lowest version of Astro you support
-
+For more documentation about Typetura's Typography system visit: [Typetura Documentation]()
 ## Project Overview
 
 ```tree
 packages
 └── typetura
-    ├── main.ts
+    ├── components
+    │   ├── Blockquote.astro
+    │   ├── Caption.astro
+    │   ├── Custom.astro
+    │   ├── Headline.astro
+    │   ├── index.js
+    │   ├── Meta.astro
+    │   ├── Packages.astro
+    │   ├── Pullquote.astro
+    │   ├── SectionHeadline.astro
+    │   ├── SectionLabel.astro
+    │   ├── SectionSubHeadline.astro
+    │   ├── SubHeadline.astro
+    │   ├── Text.astro
+    │   └── Typetura.astro
+    ├── index.js
     ├── package.json
-    ├── Typetura.astro
-    └── TypeturaP.astro
+    ├── README.md
+    ├── tsconfig.json
+    ├── types.d.ts
+    ├── types.ts
+    └── utils
+        └── utils.ts
 test
+├── blockquote.test.js
+├── caption.test.js
+├── headline.test.js
+├── meta.test.js
+├── pullquote.test.js
 ├── README.md
+├── section-headline.test.js
+├── section-label.test.js
+├── section-subheadline.test.js
+├── subheadline.test.js
+├── text.test.js
 └── typetura.test.js
 www
 ├── astro.config.mjs
@@ -37,18 +62,34 @@ www
 ├── tsconfig.json
 └── yarn.lock
 ```
+----
+
+## Formatting
 
 ESLint, Prettier and EditorConfig settings are respectively located in the following files: `.eslintrc.js`, `.prettierrc.js` and `.editorconfig` at the root of this template project.
+
+---
 
 ## Commands
 
 The following npm scripts are provided to lint and format your project
 
-| Command           | Action                                                        |
-| :---------------  | :------------------------------------------------------------ |
-| `npm run test`    | Run tests using Mocha                                         |
-| `npm run format`  | Format your project using Prettier, this edits files in-place |
-| `npm run lint`    | Lint your project using ESLint                                |
-| `npm run dev`     | Launches the Dev Server                                       |
-| `npm run publish` | Publish Component to NPM                                      |
+| Command        | Action                                                        |
+| :--------------| :------------------------------------------------------------ |
+| `yarn setup`   | Runs Yarn, sets up workspaces.                                |
+|                | Installs project dependencies                                 |
+| `yarn testAll` | Runs All tests using Mocha                                    |
+| `yarn testOne` | Runs Single test on a `<file>` using Mocha                    |
+| `yarn format`  | Format your project using Prettier, this edits files in-place |
+| `yarn lint`    | Lint your project using ESLint                                |
+| `yarn dev`     | Launches the Testing site Dev Server                          |
+| `yarn build`   | Builds the Testing site                                       |
+| `yarn publish` | Publish Component to NPM                                      |
+
+---
+
+## Support
+
+If you are experiencing any issues with using `astro-typetura` Typography plugin. Please raise an issue within the Github repository, and we will endevour to respond to it.
+
 

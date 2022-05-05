@@ -1,23 +1,6 @@
 ---
 import { getClassesFromAttrs, ManageStyles, HeadingLevels, ScopedStyleName} from '../utils/utils';
 import type { HeadlineProps } from '../types';
-// export interface HeadlineProps {
-// 	/** Set the Level of Heading Between H1-H3*/
-// 	level?: string | number;
-// 	/** Apply as SubHeadline  */
-// 	sub?: boolean;
-// 	/** Disable Typetura */
-// 	none?: boolean;
-// 	/** Apply a new Animatiton Key */
-// 	key?:string
-// 	/** Adjust the Scale for this Headline */
-// 	scale?: number;
-// 	/** Adjust the Base Size for this Headline */
-// 	base?: number;
-// 	/** Adjust the Font Timing for this Headline */
-// 	ease?: CSSStyleDeclaration['animationTimingFunction'];
-	
-// }
 
 let { level=1, scale, base, ease, none, key, ...attrs } = Astro.props as HeadlineProps;
 

@@ -77,7 +77,7 @@ describe('Test : <SubHeadline/>', () => {
 		before(async () => {
 			component = await getComponent({ none: true });
 		});
-		it('Render class="primary-subheadline"', () => {
+		it('Render class="primary-subheadline-**UUID**"', () => {
 			expect(component).to.include('class').and.to.include('primary-subheadline').and.to.include('--tt-key:none;');
 		});
 	});
@@ -87,7 +87,7 @@ describe('Test : <SubHeadline/>', () => {
 		before(async () => {
 			component = await getComponent({ base: 42 });
 		});
-		it('Render: <style>.primary-subheadline {--tt-base:42;}', () => {
+		it('Render: <style>.primary-subheadline-**UUID** {--tt-base:42;}', () => {
 			expect(component).to.include('style').and.to.include('.primary-subheadline').and.to.include('--tt-base:42');
 		});
 	});
@@ -97,7 +97,7 @@ describe('Test : <SubHeadline/>', () => {
 		before(async () => {
 			component = await getComponent({ scale: 0.5 });
 		});
-		it('Render: <style>.primary-subheadline {--tt-scale:0.5;}', () => {
+		it('Render: <style>.primary-subheadline-**UUID** {--tt-scale:0.5;}', () => {
 			expect(component).to.include('style').and.to.include('.primary-subheadline').and.to.include('--tt-scale:0.5');
 		});
 	});
@@ -107,7 +107,7 @@ describe('Test : <SubHeadline/>', () => {
 		before(async () => {
 			component = await getComponent({ ease: 'ease-in' });
 		});
-		it('Render: <style>.primary-subheadline {--tt-ease:ease-in;}', () => {
+		it('Render: <style>.primary-subheadline-**UUID** {--tt-ease:ease-in;}', () => {
 			expect(component).to.include('style').and.to.include('.primary-subheadline').and.to.include('--tt-ease:ease-in');
 		});
 	});
@@ -117,7 +117,7 @@ describe('Test : <SubHeadline/>', () => {
 		before(async () => {
 			component = await getComponent({ key: 'test' });
 		});
-		it('Render: <style>.primary-subheadline {--tt-key:test;}', () => {
+		it('Render: <style>.primary-subheadline-**UUID** {--tt-key:test;}', () => {
 			expect(component).to.include('style').and.to.include('.primary-subheadline').and.to.include('--tt-key:test;');
 		});
 	});

@@ -62,16 +62,6 @@ describe('Test: <Blockquote/>', () => {
 		});
 	});
 
-	describe('Prop Test: Props.key', () => {
-		let component;
-		before(async () => {
-			component = await getComponent({ key: 'test' });
-		});
-		it('Render: `<style>.blockquote-**UUID* {--tt-key:test;}</style>', () => {
-			expect(component).to.include('style').and.to.include('--tt-key:test;');
-		});
-	});
-
 	describe('Prop Test: Props.base', () => {
 		let component;
 		before(async () => {

@@ -47,7 +47,7 @@ describe('Test : <Text/>', () => {
 		before(async () => {
 			component = await getComponent({ none: true });
 		});
-		it('Render: `<style>.text{--tt-key:none;}</style>', () => {
+		it('Render: `<style>.text-**UUID**{--tt-key:none;}</style>', () => {
 			expect(component).to.include('style').and.to.include('--tt-key:none;');
 		});
 	});
@@ -57,7 +57,7 @@ describe('Test : <Text/>', () => {
 		before(async () => {
 			component = await getComponent({ key: 'test' });
 		});
-		it('Render: `<style>.text{--tt-key:test;}</style>', () => {
+		it('Render: `<style>.text-**UUID**{--tt-key:test;}</style>', () => {
 			expect(component).to.include('style').and.to.include('--tt-key:test;');
 		});
 	});
@@ -67,7 +67,7 @@ describe('Test : <Text/>', () => {
 		before(async () => {
 			component = await getComponent({ key: 'test' });
 		});
-		it('Render: `<style>.text{--tt-key:test;}</style>', () => {
+		it('Render: `<style>.text-**UUID**{--tt-key:test;}</style>', () => {
 			expect(component).to.include('style').and.to.include('--tt-key:test;');
 		});
 	});
@@ -77,7 +77,7 @@ describe('Test : <Text/>', () => {
 		before(async () => {
 			component = await getComponent({ base: 42 });
 		});
-		it('Render: `<style>.text{--tt-base:42;}</style>', () => {
+		it('Render: `<style>.text-**UUID**{--tt-base:42;}</style>', () => {
 			expect(component).to.include('style').and.to.include('--tt-base:42;');
 		});
 	});
@@ -87,7 +87,7 @@ describe('Test : <Text/>', () => {
 		before(async () => {
 			component = await getComponent({ scale: 0.5 });
 		});
-		it('Render: `<style>.text{--tt-scale:0.5;}</style>', () => {
+		it('Render: `<style>.text-**UUID**{--tt-scale:0.5;}</style>', () => {
 			expect(component).to.include('style').and.to.include('--tt-scale:0.5;');
 		});
 	});
@@ -97,7 +97,7 @@ describe('Test : <Text/>', () => {
 		before(async () => {
 			component = await getComponent({ ease: 'ease-in' });
 		});
-		it('Render: `<style>.text{--tt-ease:ease-in;}</style>', () => {
+		it('Render: `<style>.text-**UUID**{--tt-ease:ease-in;}</style>', () => {
 			expect(component).to.include('style').and.to.include('--tt-ease:ease-in;');
 		});
 	});
@@ -107,7 +107,7 @@ describe('Test : <Text/>', () => {
 		before(async () => {
 			component = await getComponent({ small: true, key: 'test', ease: 'ease-in', base: 42, scale: 0.5, id: 'test' });
 		});
-		it('Render: `<style>.text{--tt-key:test;--tt-ease:ease-in;--tt-base:42;--tt-scale:0.5;}</style><p class="text"/>', () => {
+		it('Render: `<style>.text-**UUID**{--tt-key:test;--tt-ease:ease-in;--tt-base:42;--tt-scale:0.5;}</style><p class="text"/>', () => {
 			expect(component)
 				.to.include('style')
 				.and.to.include('--tt-key:test;')

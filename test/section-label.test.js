@@ -93,7 +93,7 @@ describe('Test : <SectionLabel/>', () => {
 		before(async () => {
 			component = await getComponent({ none: true });
 		});
-		it('Render class="section-label"', () => {
+		it('Render class="section-label-**UUID**"', () => {
 			expect(component).to.include('class').and.to.include('section-label').and.to.include('--tt-key:none;');
 		});
 	});
@@ -103,7 +103,7 @@ describe('Test : <SectionLabel/>', () => {
 		before(async () => {
 			component = await getComponent({ base: 42 });
 		});
-		it('Render: <style>.section-label {--tt-base:42;}', () => {
+		it('Render: <style>.section-label-**UUID** {--tt-base:42;}', () => {
 			expect(component).to.include('style').and.to.include('.section-label').and.to.include('--tt-base:42');
 		});
 	});
@@ -113,7 +113,7 @@ describe('Test : <SectionLabel/>', () => {
 		before(async () => {
 			component = await getComponent({ scale: 0.5 });
 		});
-		it('Render: <style>.section-label {--tt-scale:0.5;}', () => {
+		it('Render: <style>.section-label-**UUID** {--tt-scale:0.5;}', () => {
 			expect(component).to.include('style').and.to.include('.section-label').and.to.include('--tt-scale:0.5');
 		});
 	});
@@ -123,7 +123,7 @@ describe('Test : <SectionLabel/>', () => {
 		before(async () => {
 			component = await getComponent({ ease: 'ease-in' });
 		});
-		it('Render: <style>.section-label {--tt-ease:ease-in;}', () => {
+		it('Render: <style>.section-label-**UUID** {--tt-ease:ease-in;}', () => {
 			expect(component).to.include('style').and.to.include('.section-label').and.to.include('--tt-ease:ease-in');
 		});
 	});
@@ -133,7 +133,7 @@ describe('Test : <SectionLabel/>', () => {
 		before(async () => {
 			component = await getComponent({ key: 'test' });
 		});
-		it('Render: <style>.section-label {--tt-key:test;}', () => {
+		it('Render: <style>.section-label-**UUID** {--tt-key:test;}', () => {
 			expect(component).to.include('style').and.to.include('.section-label').and.to.include('--tt-key:test;');
 		});
 	});

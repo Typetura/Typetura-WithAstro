@@ -29,7 +29,7 @@ describe('Test : <Pullquote/>', () => {
 				component = await getComponent({ is: 'blockquote' });
 			});
 			it('Render: <blockquote class="pullquote"></blockquote>', () => {
-				expect(component).to.include('<blockquote').and.to.include('class').and.to.include('pullquote').and.include('</blockquote>');
+				expect(component).to.include('<blockquote').and.to.include('class').and.to.include('.pullquote').and.include('</blockquote>');
 			});
 		});
 		describe("is = 'p'", () => {
@@ -37,7 +37,7 @@ describe('Test : <Pullquote/>', () => {
 				component = await getComponent({ is: 'p' });
 			});
 			it('Render: <p class="pullquote"></p>', () => {
-				expect(component).to.include('<p').and.to.include('class').and.to.include('pullquote').and.include('</p>');
+				expect(component).to.include('<p').and.to.include('class').and.to.include('.pullquote').and.include('</p>');
 			});
 		});
 	});
@@ -47,7 +47,7 @@ describe('Test : <Pullquote/>', () => {
 		before(async () => {
 			component = await getComponent({ none: true });
 		});
-		it('Render: `<style>.pullquote{--tt-key:none;}</style>', () => {
+		it('Render: `<style>.pullquote-**UUID** {--tt-key:none;}</style>', () => {
 			expect(component).to.include('style').and.to.include('.pullquote').and.to.include('--tt-key:none;');
 		});
 	});
@@ -57,7 +57,7 @@ describe('Test : <Pullquote/>', () => {
 		before(async () => {
 			component = await getComponent({ key: 'test' });
 		});
-		it('Render: `<style>.pullquote{--tt-key:test;}</style>', () => {
+		it('Render: `<style>.pullquote-**UUID** {--tt-key:test;}</style>', () => {
 			expect(component).to.include('style').and.to.include('.pullquote').and.to.include('--tt-key:test;');
 		});
 	});
@@ -67,7 +67,7 @@ describe('Test : <Pullquote/>', () => {
 		before(async () => {
 			component = await getComponent({ base: 42 });
 		});
-		it('Render: `<style>.pullquote{--tt-base:42;}</style>', () => {
+		it('Render: `<style>.pullquote-**UUID** {--tt-base:42;}</style>', () => {
 			expect(component).to.include('style').and.to.include('.pullquote').and.to.include('--tt-base:42;');
 		});
 	});
@@ -77,7 +77,7 @@ describe('Test : <Pullquote/>', () => {
 		before(async () => {
 			component = await getComponent({ scale: 0.5 });
 		});
-		it('Render: `<style>.pullquote{--tt-scale:0.5;}</style>', () => {
+		it('Render: `<style>.pullquote-**UUID** {--tt-scale:0.5;}</style>', () => {
 			expect(component).to.include('style').and.to.include('.pullquote').and.to.include('--tt-scale:0.5;');
 		});
 	});
@@ -87,7 +87,7 @@ describe('Test : <Pullquote/>', () => {
 		before(async () => {
 			component = await getComponent({ ease: 'ease-in' });
 		});
-		it('Render: `<style>.pullquote{--tt-ease:ease-in;}</style>', () => {
+		it('Render: `<style>.pullquote-**UUID** {--tt-ease:ease-in;}</style>', () => {
 			expect(component).to.include('style').and.to.include('.pullquote').and.to.include('--tt-ease:ease-in;');
 		});
 	});
@@ -97,7 +97,7 @@ describe('Test : <Pullquote/>', () => {
 		before(async () => {
 			component = await getComponent({ is: 'blockquote', key: 'special', ease: 'ease-in', base: 42, scale: 0.5, class: 'flex red', id: 'test' });
 		});
-		it('Render: `<style>.pullquote {--tt-key:special;--tt-ease:ease-in;--tt-base:42;--tt-scale:0.5;}</style><blockquote class="pullquote-**UUID** flex red" id="test"/>', () => {
+		it('Render: `<style>.pullquote=**UUID** {--tt-key:special;--tt-ease:ease-in;--tt-base:42;--tt-scale:0.5;}</style><blockquote class="pullquote-**UUID** flex red" id="test"/>', () => {
 			expect(component)
 				.to.include('style')
 				.and.to.include('--tt-key:special;')

@@ -16,7 +16,7 @@ describe('Test: <Typetura/> Component', () => {
 		before(async () => {
 			component = await getComponent();
 		});
-		it("Render a <script src='cdn'> && <style> with the default base and style applied</style>", () => {
+		it('Render a <script> && <style> with the default base and style applied</style>', () => {
 			expect(component.html)
 				.to.include(`script`)
 				.and.to.include(`src="https://cdn.jsdelivr.net/gh/scottkellum/typetura.js@master/js/typetura.min.js"`)

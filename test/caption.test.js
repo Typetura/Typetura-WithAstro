@@ -17,8 +17,8 @@ describe('Test: <Caption/>', () => {
 		before(async () => {
 			component = await getComponent();
 		});
-		it('Render: <p class="caption"></p>', () => {
-			expect(component).to.include('<p').and.to.include('class').and.to.include('caption').and.include('</p>');
+		it('Render: <p class="caption-**UUID**"></p>', () => {
+			expect(component).to.include('<p').and.to.include('class').and.to.include('.caption').and.include('</p>');
 		});
 	});
 
@@ -29,24 +29,24 @@ describe('Test: <Caption/>', () => {
 			before(async () => {
 				component = await getComponent({ is: 'caption' });
 			});
-			it('Render: <caption class="caption"></caption>', () => {
-				expect(component).to.include('<caption').and.to.include('class').and.to.include('caption').and.include('</caption>');
+			it('Render: <caption class="caption-**UUID**"></caption>', () => {
+				expect(component).to.include('<caption').and.to.include('class').and.to.include('.caption').and.include('</caption>');
 			});
 		});
 		describe("is = 'figcaption'", () => {
 			before(async () => {
 				component = await getComponent({ is: 'figcaption' });
 			});
-			it('Render: <figcaption class="caption"></figcaption>', () => {
-				expect(component).to.include('<figcaption').and.to.include('class').and.to.include('caption').and.include('</figcaption>');
+			it('Render: <figcaption class="caption-**UUID**"></figcaption>', () => {
+				expect(component).to.include('<figcaption').and.to.include('class').and.to.include('.caption').and.include('</figcaption>');
 			});
 		});
 		describe("is = 'div'", () => {
 			before(async () => {
 				component = await getComponent({ is: 'div' });
 			});
-			it('Render: <div class="caption"></div>', () => {
-				expect(component).to.include('<div').and.to.include('class').and.to.include('caption').and.include('</div>');
+			it('Render: <div class="caption-**UUID**"></div>', () => {
+				expect(component).to.include('<div').and.to.include('class').and.to.include('.caption').and.include('</div>');
 			});
 		});
 	});
@@ -56,8 +56,8 @@ describe('Test: <Caption/>', () => {
 		before(async () => {
 			component = await getComponent({ none: true });
 		});
-		it('Render: `<style>.caption{--tt-key:none;}</style>', () => {
-			expect(component).to.include('style').and.to.include('--tt-key:none;');
+		it('Render: `<style>.caption-**UUID**{--tt-key:none;}</style>', () => {
+			expect(component).to.include('style').and.to.include('.caption').and.to.include('--tt-key:none;');
 		});
 	});
 
@@ -66,8 +66,8 @@ describe('Test: <Caption/>', () => {
 		before(async () => {
 			component = await getComponent({ key: 'test' });
 		});
-		it('Render: `<style>.caption{--tt-key:test;}</style>', () => {
-			expect(component).to.include('style').and.to.include('--tt-key:test;');
+		it('Render: `<style>.caption-**UUID**{--tt-key:test;}</style>', () => {
+			expect(component).to.include('style').and.to.include('.caption').and.to.include('--tt-key:test;');
 		});
 	});
 
@@ -76,8 +76,8 @@ describe('Test: <Caption/>', () => {
 		before(async () => {
 			component = await getComponent({ base: 42 });
 		});
-		it('Render: `<style>.caption{--tt-base:42;}</style>', () => {
-			expect(component).to.include('style').and.to.include('--tt-base:42;');
+		it('Render: `<style>.caption-**UUID**{--tt-base:42;}</style>', () => {
+			expect(component).to.include('style').and.to.include('.caption').and.to.include('--tt-base:42;');
 		});
 	});
 
@@ -86,8 +86,8 @@ describe('Test: <Caption/>', () => {
 		before(async () => {
 			component = await getComponent({ scale: 0.5 });
 		});
-		it('Render: `<style>.caption{--tt-scale:0.5;}</style>', () => {
-			expect(component).to.include('style').and.to.include('--tt-scale:0.5;');
+		it('Render: `<style>.caption-**UUID**{--tt-scale:0.5;}</style>', () => {
+			expect(component).to.include('style').and.to.include('.caption').and.to.include('--tt-scale:0.5;');
 		});
 	});
 
@@ -96,8 +96,8 @@ describe('Test: <Caption/>', () => {
 		before(async () => {
 			component = await getComponent({ ease: 'ease-in' });
 		});
-		it('Render: `<style>.caption{--tt-ease:ease-in;}</style>', () => {
-			expect(component).to.include('style').and.to.include('--tt-ease:ease-in;');
+		it('Render: `<style>.caption-**UUID**{--tt-ease:ease-in;}</style>', () => {
+			expect(component).to.include('style').and.to.include('.caption').and.to.include('--tt-ease:ease-in;');
 		});
 	});
 
@@ -106,7 +106,7 @@ describe('Test: <Caption/>', () => {
 		before(async () => {
 			component = await getComponent({ is: 'div', key: 'div', ease: 'ease-in', base: 42, scale: 0.5, id: 'test' });
 		});
-		it('Render: `<style>.caption {--tt-key:div;--tt-ease:ease-in;--tt-base:42;--tt-scale:0.5;}</style><div class="caption" id="test"></div>', () => {
+		it('Render: `<style>.caption-**UUID** {--tt-key:div;--tt-ease:ease-in;--tt-base:42;--tt-scale:0.5;}</style><div class="caption-**UUID**" id="test"></div>', () => {
 			expect(component)
 				.to.include('style')
 				.and.to.include('--tt-key:div;')
@@ -115,7 +115,7 @@ describe('Test: <Caption/>', () => {
 				.and.to.include('--tt-scale:0.5;')
 				.and.to.include('div')
 				.and.to.include('class')
-				.and.to.include('caption')
+				.and.to.include('.caption')
 				.and.to.include('id="test"');
 		});
 	});

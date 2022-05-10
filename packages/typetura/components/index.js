@@ -10,3 +10,4 @@ export { default as SectionHeadline } from './SectionHeadline.astro';
 export { default as SectionSubHeadline } from './SectionSubHeadline.astro';
 export { default as SectionLabel } from './SectionLabel.astro';
 export { default as Text } from './Text.astro';
+export { default as Prose } from './Prose.astro';

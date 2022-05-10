@@ -21,6 +21,7 @@
     "./components/SectionSubHeadline.astro": "./components/SectionSubHeadline.astro",
     "./components/SectionLabel.astro": "./components/SectionLabel.astro",
     "./components/Text.astro": "./components/Text.astro",
+    "./components/Prose.astro": "./components/Prose.astro",
     "./components/Typetura.astro": "./components/Typetura.astro",
     "./Typetura.astro": "./components/Typetura.astro"
   },

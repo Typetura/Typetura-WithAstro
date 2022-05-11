@@ -1,4 +1,9 @@
 ---
-	//This accepts the markdown component as its slot,
-	// Applies the Typetura prose stylesheet
+import { getClassesFromAttrs } from '../utils/utils';
+const { ...attrs } = Astro.props;
+const { classlist } = getClassesFromAttrs(attrs);
 ---
+
+<div class:list={['typetura-prose', ...classlist]} {...attrs}>
+	<slot />
+</div>

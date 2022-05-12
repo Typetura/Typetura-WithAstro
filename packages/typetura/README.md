@@ -359,6 +359,36 @@ You can also customise the Typetura effects on each off these elements further b
 
 ---
 
+### `<Prose>`
+
+```astro
+---
+import {Prose} from 'astro-typetura
+import Markdown from '../markdown.md
+---
+
+<Prose>
+    <Mardown.Content>
+</Prose>
+<!-- Renders as -->
+<div class="blockquote">
+  <!-- HTML Rendered Markdown Content -->
+</div>
+```
+
+**Props:**
+
+- `is?: 'div' | 'article' | 'section'`
+- [`extends StyleProps`](#styleprops)
+
+The `Prose` Component is for providing Typetura typography over Markdown content in Astro.
+
+You can choose between a range of different html blockquote elements by using the `is` prop.
+
+To customise the Typetura Font system see: [Typetura Props](#typeturaprops)
+
+---
+
 ### `<Pullquote>`
 
 ```astro

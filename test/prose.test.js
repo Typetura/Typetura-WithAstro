@@ -16,7 +16,6 @@ describe('Test: <Prose/>', () => {
 		let component;
 		before(async () => {
 			component = await getComponent();
-			console.log(typeof component);
 		});
 		it('Render: <div class="typetura-prose"></div>', () => {
 			expect(component).to.include('<div').and.to.include('class').and.to.include('typetura-prose').and.include('</div>');
@@ -56,7 +55,6 @@ describe('Test: <Prose/>', () => {
 		let component;
 		before(async () => {
 			component = await getComponent({ is: 'article', id: 'test', class: 'flex red' });
-			console.log(component);
 		});
 		it('Render: `<article class="typetura-prose" id="test"></article>', () => {
 			expect(component).and.to.include('article').and.to.include('class').and.to.include('typetura-prose').and.to.include('flex').and.to.include('red').and.to.include('id="test"');

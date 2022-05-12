@@ -1,9 +1,21 @@
 ---
-import { getClassesFromAttrs } from '../utils/utils';
-const { ...attrs } = Astro.props;
+import { getClassesFromAttrs, handleError } from '../utils/utils';
+import { HeadlineProps } from '../types';
+export interface Props extends HeadlineProps {
+	is?: 'div' | 'article' | 'section';
+}
+const { is = 'div', ...attrs } = Astro.props as Props;
 const { classlist } = getClassesFromAttrs(attrs);
+
+const Prose =
+	is == null || /^(div|article|section)$/i.test(is)
+		? is
+		: handleError(
+				`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe Prose Component only recieves the following HTML entries:\n<div> || <article> || <section> `,
+				'Caption'
+		  );
 ---
 
-<div class:list={['typetura-prose', ...classlist]} {...attrs}>
+<Prose class:list={['typetura-prose', ...classlist]} {...attrs}>
 	<slot />
-</div>
+</Prose>

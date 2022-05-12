@@ -1,7 +1,7 @@
 ---
 import { getClassesFromAttrs, handleError } from '../utils/utils';
-import { HeadlineProps } from '../types';
-export interface Props extends HeadlineProps {
+
+export interface Props {
 	is?: 'div' | 'article' | 'section';
 }
 const { is = 'div', ...attrs } = Astro.props as Props;

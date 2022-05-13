@@ -1,13 +1,15 @@
-# Astro Typetura  
+# Astro Typetura
 
 Set of [Typetura](typetura.com) components built for use with [Astro](astro.build).
 
 ## 🌐 View Website
 
 For more information on Typeture, our products and services please visit: (Typetura)[typetura.com]
+
 ## 📚 Docs
 
 For more documentation about Typetura's Typography system visit: [Typetura Documentation]()
+
 ## Project Overview
 
 ```tree
@@ -62,7 +64,8 @@ www
 ├── tsconfig.json
 └── yarn.lock
 ```
-----
+
+---
 
 ## Formatting
 
@@ -75,7 +78,7 @@ ESLint, Prettier and EditorConfig settings are respectively located in the follo
 The following npm scripts are provided to lint and format your project
 
 | Command        | Action                                                        |
-| :--------------| :------------------------------------------------------------ |
+| :------------- | :------------------------------------------------------------ |
 | `yarn setup`   | Runs Yarn, sets up workspaces.                                |
 |                | Installs project dependencies                                 |
 | `yarn testAll` | Runs All tests using Mocha                                    |
@@ -92,4 +95,14 @@ The following npm scripts are provided to lint and format your project
 
 If you are experiencing any issues with using `astro-typetura` Typography plugin. Please raise an issue within the Github repository, and we will endevour to respond to it.
 
+---
 
+## MIT License
+
+Copyright © 2022 Typetura
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+**The software is provided “as is”, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.**

@@ -6,14 +6,14 @@ export interface Props {
 }
 const { is = 'div', ...attrs } = Astro.props as Props;
 const { classlist } = getClassesFromAttrs(attrs);
-
-const Prose =
-	is == null || /^(div|article|section)$/i.test(is)
+const Element = /^(div|article|section)$/i.test(is)
 		? is
 		: handleError(
 				`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe Prose Component only recieves the following HTML entries:\n<div> || <article> || <section> `,
-				'Caption'
+				'Prose'
 		  );
+const Prose = Element || is
+	
 ---
 
 <Prose class:list={['typetura-prose', ...classlist]} {...attrs}>

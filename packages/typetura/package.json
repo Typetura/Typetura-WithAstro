@@ -1,9 +1,18 @@
 {
   "name": "astro-typetura",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An Astro Component, utilizing Typetura's futurisitc typography and font system.",
   "author": "aFuzzyBear",
   "license": "MIT",
+  "repository": {
+     "type": "git",
+     "url": "git+https://github.com/Typetura/Typetura-WithAstro.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Typetura/Typetura-WithAstro/issues",
+    "email": "support@typetura.com"
+  },
+  "readme": "https://github.com/Typetura/Typetura-WithAstro/blob/main/packages/typetura/README.md",
   "type": "module",
   "types": "./types.d.ts",
   "exports": {

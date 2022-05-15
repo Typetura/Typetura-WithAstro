@@ -1,7 +1,7 @@
 ---
 import { getClassesFromAttrs, ManageStyles, ScopedStyleName} from '../utils/utils';
 import type { StyleProps } from '../types';
-export interface TextProps extends StyleProps{
+export interface Props extends StyleProps{
 	/** Apply as Big Text */
 	big?:boolean
 	/** Apply as Small Text */
@@ -9,7 +9,7 @@ export interface TextProps extends StyleProps{
 
 }
 
-const {big, key, small, scale, base, ease, none,...attrs} = Astro.props as TextProps
+const {big, key, small, scale, base, ease, none,...attrs} = Astro.props as Props
 
 const Text = 'p'
 

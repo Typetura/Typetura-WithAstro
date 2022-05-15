@@ -2,18 +2,19 @@
 import { getClassesFromAttrs, handleError } from '../utils/utils';
 
 export interface Props {
+	/** Select which type of HTML Element to use */
 	is?: 'div' | 'article' | 'section';
 }
 const { is = 'div', ...attrs } = Astro.props as Props;
-const { classlist } = getClassesFromAttrs(attrs);
 
-const Prose =
-	is == null || /^(div|article|section)$/i.test(is)
-		? is
-		: handleError(
-				`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe Prose Component only recieves the following HTML entries:\n<div> || <article> || <section> `,
-				'Caption'
-		  );
+const { classlist } = getClassesFromAttrs(attrs);
+const Element = /^(div|article|section)$/i.test(is)
+	? is
+	: handleError(
+			`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe Prose Component only recieves the following HTML entries:\n<div> || <article> || <section> `,
+			'Prose'
+	  );
+const Prose = Element || is;
 ---
 
 <Prose class:list={['typetura-prose', ...classlist]} {...attrs}>

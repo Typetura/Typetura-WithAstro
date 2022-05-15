@@ -1,35 +1,13 @@
 ---
+import { Packs } from '../types';
 import { handleError } from '../utils/utils';
 
-type Packages =
-	| 'Armonk'
-	| 'Austin'
-	| 'Boston'
-	| 'Brussels'
-	| 'Cape Canaveral'
-	| 'Chapel Hill'
-	| 'Chicago'
-	| 'District of Columbia'
-	| 'Fargo'
-	| 'Flagstaff'
-	| 'Kampala'
-	| 'Los Angeles'
-	| 'Madrid'
-	| 'Memphis'
-	| 'New Haven'
-	| 'New York'
-	| 'Oxford'
-	| 'Palo Alto'
-	| 'Prague'
-	| 'Saint Denis'
-	| 'Santa Fe'
-	| 'Stockholm';
 
-interface PackageProps {
-	pkg: Packages;
+export interface Props {
+	pkg: Packs;
 }
 
-const { pkg } = Astro.props as PackageProps;
+const { pkg } = Astro.props as Props;
 
 if (pkg.split(',').length > 1) {
 	handleError(`You can only pass through one Typetura Package at a time. Typetura can only hold one Package on a Page at any one time.`, 'Packages');
@@ -51,7 +29,6 @@ const render = async () => `
 
 if (!API_KEY) {
 	handleError(`
-	⚠ Error from '<Typetura.Packages/>'
 	Sorry there is no Typetura API key found within the project's '.env',
 	If you are in possesion of an API key please set it to:
 	'PUBLIC_TYPETURA_KEY=XXXXXXX-XXXXXXX-XXXXXXX-XXXXXXX'
@@ -59,7 +36,7 @@ if (!API_KEY) {
 	https://typetura.com/packages
 	If you have any issues with your API key please contact:
 	📧support@typetura.com
-	`);
+	`,'Packages');
 } else {
 	checkAPI = await fetch(`https://cdn.typetura.com/typetura.js?apiKey=${API_KEY}`).then((res) => (res.status === 200 ? true : false));
 }

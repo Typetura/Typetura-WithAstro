@@ -12,7 +12,11 @@ npm i astro-typetura -D
 
 Apply `<Typetura>` to the `<head>` of your `layout.astro` or `page.astro`. This would instantiate the Typetura typography system onto the page.
 
-```jsx
+```astro
+---
+import { Typetura } from 'astro-typetura/components';
+---
+
 <head>
   <Typetura />
 </head>
@@ -104,16 +108,12 @@ You can use the same headline component everywhere in your layout, and it will s
 
 ```astro
 ---
-import {Headline} from 'astro-typetura
+import { Headline } from 'astro-typetura/components';
 ---
 
-<Headline>
-  An Award Winning Headline
-</Headline>
+<Headline>An Award Winning Headline</Headline>
 <!-- Renders as -->
-<h1 class="primary-headline">
-  An Award Winning Headline
-</h1>
+<h1 class="primary-headline">An Award Winning Headline</h1>
 ```
 
 **Props:**
@@ -133,16 +133,12 @@ You can also customise the Typetura effects on each off these elements further b
 
 ```astro
 ---
-import {SubHeadline} from 'astro-typetura
+import { SubHeadline } from 'astro-typetura/components';
 ---
 
-<SubHeadline>
-  A Catchy SubHeadline
-</SubHeadline>
+<SubHeadline>A Catchy SubHeadline</SubHeadline>
 <!-- Renders as -->
-<h2 class="primary-headline">
-  A Catchy SubHeadline
-</h2>
+<h2 class="primary-headline">A Catchy SubHeadline</h2>
 ```
 
 **Props:**
@@ -162,16 +158,12 @@ You can also customise the Typetura effects on each off these elements further b
 
 ```astro
 ---
-import {SectionHeadline} from 'astro-typetura
+import { SectionHeadline } from 'astro-typetura/components';
 ---
 
-<SectionHeadline>
-  A Fancy Section Headline
-</SectionHeadline>
+<SectionHeadline>A Fancy Section Headline</SectionHeadline>
 <!-- Renders as -->
-<h2 class="section-headline">
-  A Fancy Section Headline
-</h2>
+<h2 class="section-headline">A Fancy Section Headline</h2>
 ```
 
 **Props:**
@@ -191,16 +183,12 @@ You can also customise the Typetura effects on each off these elements further b
 
 ```astro
 ---
-import {SectionSubHeadline} from 'astro-typetura
+import { SectionSubHeadline } from 'astro-typetura/components';
 ---
 
-<SectionSubHeadline>
-  An Award Winning SectionSubHeadline
-</SectionSubHeadline>
+<SectionSubHeadline>An Award Winning SectionSubHeadline</SectionSubHeadline>
 <!-- Renders as -->
-<h2 class="section-subheadline">
-  An Award Winning SectionSubHeadline
-</h2>
+<h2 class="section-subheadline">An Award Winning SectionSubHeadline</h2>
 ```
 
 **Props:**
@@ -220,16 +208,12 @@ You can also customise the Typetura effects on each off these elements further b
 
 ```astro
 ---
-import {SectionLabel} from 'astro-typetura
+import { SectionLabel } from 'astro-typetura/components';
 ---
 
-<SectionLabel>
-  A Section Label
-</SectionLabel>
+<SectionLabel>A Section Label</SectionLabel>
 <!-- Renders as -->
-<h2 class="section-label">
-  A Section Label
-</h2>
+<h2 class="section-label">A Section Label</h2>
 ```
 
 **Props:**
@@ -249,16 +233,12 @@ You can also customise the Typetura effects on each off these elements further b
 
 ```astro
 ---
-import {Text} from 'astro-typetura
+import { Text } from 'astro-typetura/components';
 ---
 
-<Text>
-  Your text content would go here
-</Text>
+<Text>Your text content would go here</Text>
 <!-- Renders as -->
-<p class="regular">
-  Your text content would go here
-</p>
+<p class="regular">Your text content would go here</p>
 ```
 
 **Props:**
@@ -279,16 +259,12 @@ You can also customise the Typetura effects on each off these elements further b
 
 ```astro
 ---
-import {Caption} from 'astro-typetura
+import { Caption } from 'astro-typetura/components';
 ---
 
-<Caption>
-  CAptioned Text
-</Caption>
+<Caption>CAptioned Text</Caption>
 <!-- Renders as -->
-<caption class="caption">
-  Meta-text descriptions
-</caption>
+<caption class="caption"> Meta-text descriptions </caption>
 ```
 
 **Props:**
@@ -308,16 +284,12 @@ You can also customise the Typetura effects on each off these elements further b
 
 ```astro
 ---
-import {Meta} from 'astro-typetura
+import { Meta } from 'astro-typetura/components';
 ---
 
-<Meta>
-  Meta-text descriptions
-</Meta>
+<Meta>Meta-text descriptions</Meta>
 <!-- Renders as -->
-<p class="meta">
-  Meta-text descriptions
-</p>
+<p class="meta">Meta-text descriptions</p>
 ```
 
 **Props:**
@@ -334,16 +306,12 @@ You can also customise the Typetura effects on each off these elements further b
 
 ```astro
 ---
-import {Blockquote} from 'astro-typetura
+import { Blockquote } from 'astro-typetura/components';
 ---
 
-<Blockquote>
-  Meta-text descriptions
-</Blockquote>
+<Blockquote>Meta-text descriptions</Blockquote>
 <!-- Renders as -->
-<blockquote class="blockquote">
-  Meta-text descriptions
-</blockquote>
+<blockquote class="blockquote">Meta-text descriptions</blockquote>
 ```
 
 **Props:**
@@ -363,7 +331,7 @@ You can also customise the Typetura effects on each off these elements further b
 
 ```astro
 ---
-import {Prose} from 'astro-typetura
+import {Prose} from 'astro-typetura/components'
 import Markdown from '../markdown.md
 ---
 
@@ -393,16 +361,12 @@ To customise the Typetura Font system see: [Typetura Props](#typeturaprops)
 
 ```astro
 ---
-import {Pullquote} from 'astro-typetura
+import { Pullquote } from 'astro-typetura/components';
 ---
 
-<Pullquote>
-  Meta-text descriptions
-</Pullquote>
+<Pullquote>Meta-text descriptions</Pullquote>
 <!-- Renders as -->
-<blockquote class="pullquote">
-  Meta-text descriptions
-</blockquote>
+<blockquote class="pullquote">Meta-text descriptions</blockquote>
 ```
 
 **Props:**

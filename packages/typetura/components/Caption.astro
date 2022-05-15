@@ -1,12 +1,12 @@
 ---
 import { handleError,getClassesFromAttrs, ManageStyles, ScopedStyleName} from '../utils/utils';
 import type { StyleProps } from '../types';
-export interface CaptionProps  extends StyleProps {
-	/** Select which type of Caption to use */
+export interface Props  extends StyleProps {
+	/** Select which type of HTML Element to use */
 	is?:   'p' | 'caption' | 'figcaption' | 'div'
 }
 
-const {is ='p', key, scale, base, ease, none,...attrs} = Astro.props as CaptionProps
+const {is ='p', key, scale, base, ease, none,...attrs} = Astro.props as Props
 
 const Caption = is == null || (/^(caption|figcaption|p|div)$/i).test(is) ? is : handleError(`Incorrect HTML entry passed\nYou have tried to pass : ${is}.\nThe Caption Component only recieves the following HTML entries:\n<caption> || <figcaption> || <div> || <p>`,'Caption')
 

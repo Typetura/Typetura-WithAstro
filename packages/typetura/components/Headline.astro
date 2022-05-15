@@ -2,7 +2,9 @@
 import { getClassesFromAttrs, ManageStyles, HeadingLevels, ScopedStyleName} from '../utils/utils';
 import type { HeadlineProps } from '../types';
 
-let { level=1, scale, base, ease, none, key, ...attrs } = Astro.props as HeadlineProps;
+export interface Props extends HeadlineProps{}
+
+let { level=1, scale, base, ease, none, key, ...attrs } = Astro.props as Props;
 
 const Headline: string = HeadingLevels(level,[1,3],'Headline')
 

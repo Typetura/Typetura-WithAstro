@@ -13,9 +13,9 @@ export const getClassesFromAttrs = <TAttrs>(attrs: TAttrs) => {
 	const classes = Object.keys(attrs).find((item) => /^class$/i.test(item));
 	let additionalClassList: string[] = [];
 	if (classes) {
-		//@ts-ignore
+		//@ts-expect-error : Object Attrs has undeclared type signs
 		let classList = attrs['class'];
-		//@ts-ignore
+		//@ts-expect-error : Object Attrs has undeclared type signs
 		delete attrs['class'];
 		classList = typeof classList === 'string' ? classList.split(' ') : handleError('Incorrect values passed as classes.');
 		additionalClassList = classList;
@@ -28,17 +28,17 @@ export const getClassesFromAttrs = <TAttrs>(attrs: TAttrs) => {
 
 export const UUID = () => Math.random().toString(36).slice(9);
 
-export const ScopedStyleName = (classname: string) => ({ scopedClass: `.${classname}-${UUID()}` });
+export const ScopedStyleName = (classname: string) => ({ scopedClass: `${classname} ${UUID()}` });
 
-export const ManageStyles = (leclass: string, key?: string, none?: boolean, base?: number, scale?: number, ease?: string | number): string => {
+export const ManageStyles = (classlist: string, key?: string, none?: boolean, base?: number, scale?: number, ease?: string | number): string => {
 	let str = '';
-	const sentence = (classes: string, statement: string): string => `${classes} {${statement}}`;
-	if (leclass.split(' ').length > 1) {
-		handleError('Error with manageStyles(): Only one class allowed');
+	const sentence = (classes: string, statement: string): string => `.${classes} {${statement}}`;
+	if (classlist.split(' ').length > 2) {
+		handleError('Error with manageStyles():', classlist);
 	}
 	if (none && !key) {
 		str = `--tt-key:none;`;
-		return sentence(leclass, str);
+		return sentence(classlist, str);
 	}
 	if (key && !none) {
 		str += `--tt-key:${key};`;
@@ -52,7 +52,7 @@ export const ManageStyles = (leclass: string, key?: string, none?: boolean, base
 	if (scale) {
 		str += `--tt-scale:${scale};`;
 	}
-	return sentence(leclass, str);
+	return sentence(classlist, str);
 };
 
 export const HeadingLevels = (level: string | number, rangeOfHeadings: number[], component: string) => {

@@ -1,6 +1,7 @@
 ---
-//@ts-ignore
-import { Typetura, Headline, Pullquote, Blockquote, Caption, Meta, SectionHeadline, SectionSubHeadline, Text, SubHeadline } from 'astro-typetura';
+
+import { Typetura, Pullquote, Blockquote, Caption, Meta, SectionHeadline, SectionSubHeadline, Text, SubHeadline, Headline } from 'astro-typetura/components';
+
 
 
 ---
@@ -10,10 +11,11 @@ import { Typetura, Headline, Pullquote, Blockquote, Caption, Meta, SectionHeadli
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<title>Astro</title>
-		<Typetura  pack={'Santa fe'} js base={40} scale={1.5} />
+		<Typetura  pack={'Santa Fe'} js base={40} scale={1.5} />
 	</head>
 	<body>
 		<header>
+			
 			<Headline >Welcome Scott</Headline>
 			<SubHeadline base={42}>Typetura/withastro Components</SubHeadline>
 		</header>
@@ -27,7 +29,7 @@ import { Typetura, Headline, Pullquote, Blockquote, Caption, Meta, SectionHeadli
 				<Headline>Primary Headline</Headline>
 			</div>
 			<div class="wraper">
-				<SubHeadline level="5" base={42}>Sub Headline</SubHeadline>
+				<SubHeadline  level="5" base={42}>Sub Headline</SubHeadline>
 				<SubHeadline>Sub Headline</SubHeadline>
 			</div>
 			<div class="wraper">

@@ -2,8 +2,9 @@
 import { StyleProps } from '../types';
 import { getClassesFromAttrs, ManageStyles, ScopedStyleName} from '../utils/utils';
 
+export interface Props extends StyleProps{}
 
-const {scale,key, base, ease, none,...attrs} = Astro.props as StyleProps
+const {scale,key, base, ease, none,...attrs} = Astro.props as Props
 
 const Meta = 'p'
 
